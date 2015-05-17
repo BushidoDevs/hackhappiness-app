@@ -1,0 +1,17 @@
+<ion-view view-title="Trendings">
+  <ion-nav-buttons side="secondary">
+    <button class="button button-icon icon ion-ios-plus-empty" ng-click="openAddHappiness()"></button>
+  </ion-nav-buttons>
+  <ion-content>
+    <ion-list>
+      <ion-item ng-repeat="happiness in happinesses" type="item-text-wrap">
+        <i class="button button-small button-icon icon" ng-repeat="n in happinessRange" ng-class="{
+        'ion-happy': n <= happiness.level,
+        'ion-happy-outline': n > happiness.level
+        }"></i>
+        <h2>{{happiness.message}}</h2>
+        <p>{{happiness.city}}, {{happiness.country}}</p>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

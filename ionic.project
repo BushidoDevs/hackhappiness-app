@@ -1,0 +1,12 @@
+{
+  "name": "Hackhappiness",
+  "app_id": "es.geeks2team.hackhappiness",
+  "gulpStartupTasks": [
+    "sass",
+    "watch"
+  ],
+  "watchPatterns": [
+    "www/**/*",
+    "!www/lib/**/*"
+  ]
+}

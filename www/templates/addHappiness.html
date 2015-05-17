@@ -1,0 +1,29 @@
+<ion-modal-view>
+  <ion-header-bar>
+    <h1 class="title">Happiness</h1>
+    <div class="buttons">
+      <button class="button button-clear" ng-click="closeAddHappiness()">Close</button>
+    </div>
+  </ion-header-bar>
+  <ion-content>
+    <form ng-submit="addHappiness()">
+      <div class="list">
+        <label class="item item-input item-stacked-label">
+          <span class="input-label">What make you happy now?</span>
+          <textarea type="text" ng-model="happinessData.message"></textarea>
+        </label>
+        <label class="item item-input item-divider">
+          <span class="input-label">How much make it happy?</span>
+        </label>
+        <div class="item range">
+          <i class="icon ion-happy-outline"></i>
+          <input type="range" ng-model="happinessData.level" min="1" max="5" step="1" value="3">
+          <i class="icon ion-happy"></i>
+        </div>
+        <label class="item">
+          <button class="button button-block button-positive" type="submit">Submit</button>
+        </label>
+      </div>
+    </form>
+  </ion-content>
+</ion-modal-view>
