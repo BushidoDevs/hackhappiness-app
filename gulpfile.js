@@ -14,6 +14,11 @@ var uglify = require("gulp-uglify");
 var imagemin = require('gulp-imagemin');
 var htmlreplace = require('gulp-html-replace');
 var templateCache = require('gulp-angular-templatecache');
+var wiredep = require('wiredep');
+var usemin = require('gulp-usemin');
+var minifyHtml = require('gulp-minify-html');
+var rev = require('gulp-rev');
+var install = require("gulp-install");
 
 var paths = {
   sass: ['./scss/**/*.scss'],
@@ -22,44 +27,12 @@ var paths = {
   templates: ['./www/templates/**/*.html'],
   css: ['./www/css/**/*.min.css'],
   html: ['./www/index.html'],
-  extras: ['./www/PushNotification.js'],
-  ionicbundle: ['./www/lib/ionic/js/ionic.bundle.min.js'],
-  ionicfonts: ['./www/lib/ionic/fonts/*'],
+  fonts: ['./www/lib/ionic/fonts/*'],
   lib: ['./www/lib/parse-1.2.18.min.js', './www/lib/moment.min.js', './www/lib/bindonce.min.js'],
+  www: ['./www/'],
   dist: ['./dist/']
 };
-var files = {
-  jsbundle: 'app.bundle.min.js',
-  appcss: 'app.css'
-};
-
-gulp.task('default', ['sass']);
-
-gulp.task('sass', function(done) {
-  gulp.src('./scss/ionic.app.scss')
-    .pipe(sass({
-      errLogToConsole: true
-    }))
-    .pipe(gulp.dest('./www/css/'))
-    .pipe(minifyCss({
-      keepSpecialComments: 0
-    }))
-    .pipe(rename({ extname: '.min.css' }))
-    .pipe(gulp.dest('./www/css/'))
-    .on('end', done);
-});
-
-gulp.task('watch', function() {
-  gulp.watch(paths.sass, ['sass']);
-});
-
-gulp.task('install', ['git-check'], function() {
-  return bower.commands.install()
-    .on('log', function(data) {
-      gutil.log('bower', gutil.colors.cyan(data.id), data.message);
-    });
-});
-
+// Check the project is up to date.
 gulp.task('git-check', function(done) {
   if (!sh.which('git')) {
     console.log(
@@ -72,90 +45,95 @@ gulp.task('git-check', function(done) {
   }
   done();
 });
-
-gulp.task('build', ['sass', 'scripts', 'styles', 'imagemin', 'index', 'copy']);
-
-gulp.task('clean', function() {
-  return gulp.src(paths.dist, {
-      read: false
-    })
-    .pipe(clean());
+// Install npm packages.
+gulp.task('npm', function(done) {
+  gulp.src(['./package.json'])
+    .pipe(install());
 });
-
-// Prepare Index.html for dist - ie. using min files
-gulp.task('index', ['clean'], function() {
+// Install bower dependenices.
+gulp.task('bower', function () {
+  bower.commands.install()
+    .on('log', function(data) {
+      gutil.log('bower', gutil.colors.cyan(data.id), data.message);
+    });
+});
+// Set bower dependencies.
+gulp.task('wiredep', function(){
   gulp.src(paths.html)
-    .pipe(htmlreplace({
-      'css': 'css/app.min.css',
-      'js': 'js/app.bundle.min.js'
-    }))
-    .pipe(gulp.dest(paths.dist + '.'));
+    .pipe(wiredep.stream())
+    .pipe(gulp.dest(paths.www + './'));
 });
+gulp.task('install', ['git-check', 'npm', 'bower', 'wiredep']);
 
-// scripts - clean dist dir then annotate, minify, concat
-gulp.task('scripts', ['clean', 'templateCache'], function() {
-  gulp.src(paths.scripts)
-  //.pipe(jshint())
-  //.pipe(jshint.reporter('default'))
-  .pipe(ngAnnotate({
-    remove: true,
-    add: true,
-    single_quotes: true
-  }))
-    .pipe(uglify())
-    .pipe(concat(files.jsbundle))
-    .pipe(gulp.dest(paths.dist + 'js'));
+// Build sass file.
+gulp.task('sass', function(done) {
+  gulp.src('./scss/ionic.app.scss')
+    .pipe(sass({
+      errLogToConsole: true
+    }))
+    .pipe(gulp.dest(paths.www + 'css/'))
+    .on('end', done);
 });
 
 // concat all html templates and load into templateCache
-gulp.task('templateCache', ['clean'], function() {
-  return gulp.src(paths.templates)
+gulp.task('templateCache', function() {
+  gulp.src(paths.templates)
     .pipe(templateCache({
       'filename': 'templates.js',
       'root': 'templates/',
       'module': 'app'
     }))
-    .pipe(gulp.dest('./www/js'));
+    .pipe(gulp.dest(paths.www + 'js'))
+  done();
 });
 
-// Copy all other files to dist directly
-gulp.task('copy', ['clean'], function() {
-  // Copy ionic bundle file
-  gulp.src(paths.ionicbundle)
-    .pipe(gulp.dest(paths.dist + 'lib/ionic/js/.'));
+gulp.task('templateCache', function() {
+  gulp.src(paths.scripts)
+    .pipe(jshint())
+    .pipe(jshint.reporter('default'));
+});
+gulp.task('watch', function() {
+  gulp.watch(paths.sass, ['sass']);
+  gulp.watch(paths.templates, ['templateCache']);
+  gulp.watch(paths.scripts, ['scripts']);
+});
+gulp.task('default', ['sass', 'templateCache']);
 
-  // Copy ionic fonts
-  gulp.src(paths.ionicfonts)
-    .pipe(gulp.dest(paths.dist + 'lib/ionic/fonts'));
-
-  // Copy lib scripts
-  gulp.src(paths.lib)
-    .pipe(gulp.dest(paths.dist + 'lib'));
-
-  // Copy extra files
-  gulp.src(paths.extras)
-    .pipe(gulp.dest(paths.dist + '.'));
+gulp.task('clean', function(done) {
+  gulp.src(paths.dist, { read: false })
+    .pipe(clean());
+  done();
 });
 
-// styles - min app css then copy min css to dist
-gulp.task('minappcss', function() {
-  return gulp.src('./www/css/' + files.appcss)
-    .pipe(minifyCss())
-    .pipe(rename({
-      extname: '.min.css'
+gulp.task('usemin', ['clean', 'sass', 'templateCache'], function (done) {
+  gulp.src(paths.html)
+    .pipe(usemin({
+      html: [minifyHtml({empty: true})],
+      css: [minifyCss(), 'concat', rev()],
+      jsVendor: [uglify(), rev()],
+      jsApp: [
+        ngAnnotate({remove: true, add: true, single_quotes: true }),
+        jshint(),
+        jshint.reporter('default'),  
+        uglify(),
+        rev()
+      ]
     }))
-    .pipe(gulp.dest('./www/css/'));
+    .pipe(gulp.dest(paths.dist + ''));
+  done();
 });
-
-// styles - min app css then copy min css to dist
-gulp.task('styles', ['clean', 'minappcss'], function() {
-  gulp.src(paths.css)
-    .pipe(gulp.dest(paths.dist + 'css'));
-});
-
 // Imagemin images and ouput them in dist
-gulp.task('imagemin', ['clean'], function() {
+gulp.task('imagemin', function() {
   gulp.src(paths.images)
     .pipe(imagemin())
     .pipe(gulp.dest(paths.dist + 'img'));
+});
+
+gulp.task('copy', function() {
+  gulp.src(paths.fonts, {base: paths.www + ''})
+    .pipe(gulp.dest(paths.dist + ''));
+});
+
+gulp.task('build', ['clean', 'usemin', 'imagemin'], function(){
+  gulp.start('copy');
 });
