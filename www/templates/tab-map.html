@@ -1,12 +1,15 @@
 <ion-view view-title="Map">
-  <ion-content class="padding">
+  <ion-content>
   	<ui-gmap-google-map center='map.center' 
   						zoom='map.zoom'
   						control='map.control'
-  						bounds='map.bounds'>
-  		<ui-gmap-markers 	models="markers"
+  						bounds='map.bounds'
+              events='map.events'>
+  		<ui-gmap-markers 	models="markers.models"
   							coords="'self'"
-  							icon="'icon'">
+  							icon="'icon'"
+                control="markers.control"
+                options="'options'">
         </ui-gmap-markers>
   	</ui-gmap-google-map>
   </ion-content>

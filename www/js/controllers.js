@@ -4,19 +4,32 @@ angular.module('app.controllers', ['uiGmapgoogle-maps'])
 
   uiGmapIsReady.promise(1).then(function(instances) {
     instances.forEach(function(inst) {
-      $scope.markers = PointsService.points($scope.map.bounds);
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function (position) {
-          $scope.map.control.refresh({ latitude: position.coords.latitude, longitude: position.coords.longitude });
-        });
-      } else {
-        alert('Unable to locate current position');
-      }
+      
+      GeoService.getCurrentPosition(function (position) {
+        $scope.map.control.refresh({
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude
+          }
+        );
+      });
+
     });
   });
 
-  $scope.markers = [];
+  var updateMarkers = function(e) {
+    if (typeof $scope.markers.control.updateModels == 'function')
+      $scope.markers.control.updateModels(PointsService.points(e.getBounds()));
+  };
+  
+  $scope.markers = {
+    models: [],
+    control: {}
+  }
   $scope.map = GeoService.map;
+  $scope.map.events = {
+    // Al realizar un drag del mapa, se actualizan los markers.
+    'bounds_changed' : updateMarkers
+  };
 })
 
 .controller('TrendingCtrl', function($scope, $ionicModal, Happinesses) {
