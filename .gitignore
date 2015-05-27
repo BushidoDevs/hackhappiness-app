@@ -6,5 +6,7 @@ platforms/
 plugins/
 www/lib/
 dist/
+resources/
+android/
 templates.js
 .DS_Store
