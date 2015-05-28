@@ -25,22 +25,19 @@ angular.module('app.services', [])
     }
   };
 })
-.factory('PointsService', function($resource) {
+.factory('MarkersService', function($resource) {
   return {
-    points: function(bounds) {
+    getFakeMarkers: function(lat, lng) {
       var markers = [];
-      var createRandomMarker = function(i, bounds, idKey) {
-        var lat_min = bounds.Da.A,
-        lat_range = bounds.Da.j - lat_min,
-        lng_min = bounds.va.j,
-        lng_range = bounds.va.A - lng_min;
+      var createRandomMarker = function(i, lat, lng, idKey) {
 
         if (idKey == null) {
           idKey = "id";
         }
 
-        var latitude = lat_min + (Math.random() * lat_range);
-        var longitude = lng_min + (Math.random() * lng_range);
+        var latitude = lat + (Math.random() * 0.01);
+        var longitude = lng + (Math.random() * 0.01);
+
         var ret = {
           latitude: latitude,
           longitude: longitude,
@@ -55,8 +52,8 @@ angular.module('app.services', [])
         return ret;
       };
 
-      for (var i = 0; i < 20; i++) {
-        markers.push(createRandomMarker(i, bounds))
+      for (var i = 0; i < 3; i++) {
+        markers.push(createRandomMarker(i, lat, lng))
       }
       return markers;
     }
