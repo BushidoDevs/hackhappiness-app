@@ -87,7 +87,7 @@ gulp.task('templateCache', function() {
   done();
 });
 
-gulp.task('templateCache', function() {
+gulp.task('jshint', function() {
   gulp.src(paths.scripts)
     .pipe(jshint())
     .pipe(jshint.reporter('default'));
@@ -134,6 +134,8 @@ gulp.task('copy', function() {
     .pipe(gulp.dest(paths.dist + ''));
 });
 
-gulp.task('build', ['clean', 'usemin', 'imagemin'], function(){
+gulp.task('build', ['clean'], function(){
+  gulp.start('usemin');
+  gulp.start('imagemin');
   gulp.start('copy');
 });
