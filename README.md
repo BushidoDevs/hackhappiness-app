@@ -1,4 +1,4 @@
-#The repo for HackHappiness App 
+# The repo for HackHappiness App 
 
 ### Dependencies
 + [npm](https://npmjs.org/)
@@ -6,6 +6,8 @@
 + [Android 24.0.1 SDK](http://developer.android.com/sdk)
 + [grunt-cli](http://gruntjs.com/)
 + [bower](http://bower.io/)
+
+After install this dependencies run ```gulp install``` to install all dependencies and setup the project.
 
 ## Setup: Starting from scratch on MacOS (recommemded setup)
 
@@ -24,7 +26,7 @@ android update sdk --no-ui -a --filter tools,platform-tools,android-19,build-too
 rvm install ruby-2.0.0-p598
 
 
-###ENV vars
+### ENV vars
 
 Please follow the instructions to setup Direnv to take all the advantages of it [here](http://direnv.net/#man/direnv.1)
 

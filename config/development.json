@@ -1,0 +1,11 @@
+{
+  "dpdConfig": {
+    "collections": ["happinesses", "users"],
+    "serverRoot": "http://localhost:3000/",
+    "socketOptions": {
+      "reconnectionDelayMax": 3000
+    },
+    "useSocketIo": false,
+    "noCache": false
+  }
+}

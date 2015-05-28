@@ -1,7 +1,7 @@
-angular.module('app.services', [])
+angular.module('app.services', ['dpd'])
 
-.factory('Happinesses', function($resource) {
-  return $resource('http://hackhappiness.herokuapp.com/happinesses/:id', { happinessId:'@id' });
+.factory('Happinesses', function(dpd) {
+  return dpd.happinesses;
 })
 .factory('GeoService', function($resource) {
   return {
@@ -31,7 +31,7 @@ angular.module('app.services', [])
       var markers = [];
       var createRandomMarker = function(i, lat, lng, idKey) {
 
-        if (idKey == null) {
+        if (idKey === null) {
           idKey = "id";
         }
 
@@ -53,9 +53,9 @@ angular.module('app.services', [])
       };
 
       for (var i = 0; i < 3; i++) {
-        markers.push(createRandomMarker(i, lat, lng))
+        markers.push(createRandomMarker(i, lat, lng));
       }
       return markers;
     }
-  }
+  };
 });

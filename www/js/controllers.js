@@ -12,7 +12,7 @@ angular.module('app.controllers', ['uiGmapgoogle-maps'])
               longitude: position.coords.longitude
             }
           );
-        })
+        });
       });
 
     });
@@ -30,7 +30,7 @@ angular.module('app.controllers', ['uiGmapgoogle-maps'])
   $scope.markers = {
     models: [],
     control: {}
-  }
+  };
   $scope.map = GeoService.map;
   $scope.map.events = {
     // Al realizar un drag del mapa, se actualizan los markers.
@@ -44,8 +44,12 @@ angular.module('app.controllers', ['uiGmapgoogle-maps'])
   $scope.happinessRangeMin = $scope.happinessRange[0];
   $scope.happinessRangeMax = $scope.happinessRange[$scope.happinessRange.length - 1];
 
-  var happinesses = Happinesses.query(function() {
-    $scope.happinesses = happinesses;
+  Happinesses.get({
+    $sort: {
+      createdDate: 1
+    }
+  }).then(function(response){
+    $scope.happinesses = response.data;
   });
 
   // Create the login modal that we will use later

@@ -9,4 +9,5 @@ dist/
 resources/
 android/
 templates.js
+constants.js
 .DS_Store

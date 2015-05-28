@@ -10,6 +10,7 @@ var sh = require('shelljs');
 var clean = require('gulp-clean');
 var jshint = require('gulp-jshint');
 var ngAnnotate = require('gulp-ng-annotate');
+var ngConstant = require('gulp-ng-constant');
 var uglify = require("gulp-uglify");
 var imagemin = require('gulp-imagemin');
 var htmlreplace = require('gulp-html-replace');
@@ -21,6 +22,7 @@ var rev = require('gulp-rev');
 var install = require("gulp-install");
 
 var paths = {
+  config: ['./config/**/*.json'],
   sass: ['./scss/**/*.scss'],
   scripts: ['./www/js/**/*.js', '!./www/js/app.bundle.min.js'], // exclude the file we write too
   images: ['./www/img/**/*'],
@@ -63,7 +65,7 @@ gulp.task('wiredep', function(){
     .pipe(wiredep.stream())
     .pipe(gulp.dest(paths.www + './'));
 });
-gulp.task('install', ['git-check', 'npm', 'bower', 'wiredep']);
+gulp.task('install', ['git-check', 'npm', 'bower', 'setup', 'wiredep']);
 
 // Build sass file.
 gulp.task('sass', function(done) {
@@ -86,6 +88,19 @@ gulp.task('templateCache', function(done) {
     .pipe(gulp.dest(paths.www + 'js'))
     .on('end', done);
 });
+gulp.task('constants', function (done) {
+  var env = (gutil.env.production ? 'production' : 'development');
+  var constnats = require('./config/' + env + '.json');
+  return ngConstant({
+      name: 'app.config',
+      deps: [],
+      constants: constnats,
+      stream: true
+    })
+    .pipe(gulp.dest(paths.www + 'js'));
+});
+
+gulp.task('setup', ['templateCache', 'constants']);
 
 gulp.task('jshint', function() {
   gulp.src(paths.scripts)
@@ -95,9 +110,10 @@ gulp.task('jshint', function() {
 gulp.task('watch', function() {
   gulp.watch(paths.sass, ['sass']);
   gulp.watch(paths.templates, ['templateCache']);
-  gulp.watch(paths.scripts, ['scripts']);
+  gulp.watch(paths.config, ['constants']);
+  gulp.watch(paths.scripts, ['jshint']);
 });
-gulp.task('default', ['sass', 'templateCache']);
+gulp.task('default', ['sass', 'templateCache', 'constants']);
 
 gulp.task('clean', function(done) {
   gulp.src(paths.dist, { read: false })
@@ -105,7 +121,7 @@ gulp.task('clean', function(done) {
   done();
 });
 
-gulp.task('usemin', ['clean', 'sass', 'templateCache'], function (done) {
+gulp.task('usemin', ['clean', 'sass', 'templateCache', 'constants'], function (done) {
   gulp.src(paths.html)
     .pipe(usemin({
       html: [minifyHtml({empty: true})],
