@@ -76,7 +76,7 @@ gulp.task('sass', function(done) {
 });
 
 // concat all html templates and load into templateCache
-gulp.task('templateCache', function() {
+gulp.task('templateCache', function(done) {
   gulp.src(paths.templates)
     .pipe(templateCache({
       'filename': 'templates.js',
@@ -84,7 +84,7 @@ gulp.task('templateCache', function() {
       'module': 'app'
     }))
     .pipe(gulp.dest(paths.www + 'js'))
-  done();
+    .on('end', done);
 });
 
 gulp.task('jshint', function() {
