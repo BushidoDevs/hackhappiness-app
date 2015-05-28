@@ -1,24 +1,30 @@
 angular.module('app.controllers', ['uiGmapgoogle-maps'])
 
-.controller('MapCtrl', function($scope, GeoService, PointsService, uiGmapIsReady) {
+.controller('MapCtrl', function($scope, GeoService, MarkersService, uiGmapIsReady) {
 
   uiGmapIsReady.promise(1).then(function(instances) {
     instances.forEach(function(inst) {
       
-      GeoService.getCurrentPosition(function (position) {
-        $scope.map.control.refresh({
-            latitude: position.coords.latitude,
-            longitude: position.coords.longitude
-          }
-        );
+      ionic.Platform.ready(function() { 
+        GeoService.getCurrentPosition(function (position) {
+          $scope.map.control.refresh({
+              latitude: position.coords.latitude,
+              longitude: position.coords.longitude
+            }
+          );
+        })
       });
 
     });
   });
 
   var updateMarkers = function(e) {
-    if (typeof $scope.markers.control.updateModels == 'function')
-      $scope.markers.control.updateModels(PointsService.points(e.getBounds()));
+
+    if (typeof $scope.markers.control.updateModels == 'function') {
+      $scope.markers.control.updateModels(
+        MarkersService.getFakeMarkers(e.data.map.center.lat(), e.data.map.center.lng())
+      );
+    }
   };
   
   $scope.markers = {
