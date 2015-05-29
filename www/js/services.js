@@ -31,7 +31,7 @@ angular.module('app.services', ['dpd'])
       var markers = [];
       var createRandomMarker = function(i, lat, lng, idKey) {
 
-        if (idKey == null) {
+        if (idKey === undefined) {
           idKey = "id";
         }
 
