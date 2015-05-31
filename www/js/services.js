@@ -23,7 +23,7 @@ angular.module('app.services', ['dpd', 'ngCookies'])
     var deferred = $q.defer();
     Users.post(data)
       .success(function(user){
-        $cookies.sid = user.id
+        $cookies.sid = user.id;
         Users.current()
           .then(deferred.resolve)
           .catch(deferred.reject);
@@ -35,7 +35,7 @@ angular.module('app.services', ['dpd', 'ngCookies'])
     var deferred = $q.defer();
     Users.exec('login', data)
       .success(function(user){
-        $cookies.sid = user.id
+        $cookies.sid = user.id;
         Users.current()
           .then(deferred.resolve)
           .catch(deferred.reject);
@@ -47,7 +47,7 @@ angular.module('app.services', ['dpd', 'ngCookies'])
     var deferred = $q.defer();
     Users.exec('logout')
       .success(function(user){
-        $cookies.sid = null
+        $cookies.sid = null;
         deferred.resolve();
       })
       .error(deferred.reject);

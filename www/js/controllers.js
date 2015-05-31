@@ -70,7 +70,7 @@ angular.module('app.controllers', ['uiGmapgoogle-maps'])
       .then($scope.modal.show)
       .catch(function(){
         $state.go('app.account');
-      })
+      });
   };
 })
 
@@ -97,7 +97,7 @@ angular.module('app.controllers', ['uiGmapgoogle-maps'])
     }).then(function(response){
       $scope.happinesses = response.data;
     });
-  }
+  };
   var loginSuccess = function(user){
     $scope.user = user;
     $scope.auth.data = {};
@@ -105,11 +105,11 @@ angular.module('app.controllers', ['uiGmapgoogle-maps'])
     getUserHappinesses();
     $scope.closeAuth();
     currentForm = null;
-  }
+  };
   var logoutSuccess = function(){
     $cookies.sid = null;
     $scope.user = null;
-  }
+  };
   $scope.$on('$ionicView.beforeEnter', getCurrentUser);
   $scope.happinessRange = happinessRange;
   $scope.auth = {

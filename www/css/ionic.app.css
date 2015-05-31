@@ -7675,24 +7675,27 @@ a.button {
   -webkit-transition-duration: 0s;
   transition-duration: 0s; }
 
-/* Maps */
+/* Empty. Add your own CSS if you like */
 .angular-google-map-container {
   height: 500px; }
 
 .label-background {
   background-color: #fff; }
 
-/* Login */
+/** Styling for the username field **/
 .item.has-error {
   border-bottom: 2px solid #ef473a; }
 
+/** Styling for the password field when an error exists**/
 .item.has-error-lr {
   border-left: 2px solid #ef473a;
   border-right: 2px solid #ef473a; }
 
+/** Styling for the password field when an error has been resolved**/
 .item.valid-lr {
   border-left: 2px solid #33cd5f;
   border-right: 2px solid #33cd5f; }
 
+/** Styling for the error text and container **/
 .form-error {
   color: #ef473a; }
