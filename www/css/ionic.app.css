@@ -7674,3 +7674,25 @@ a.button {
   opacity: 0;
   -webkit-transition-duration: 0s;
   transition-duration: 0s; }
+
+/* Maps */
+.angular-google-map-container {
+  height: 500px; }
+
+.label-background {
+  background-color: #fff; }
+
+/* Login */
+.item.has-error {
+  border-bottom: 2px solid #ef473a; }
+
+.item.has-error-lr {
+  border-left: 2px solid #ef473a;
+  border-right: 2px solid #ef473a; }
+
+.item.valid-lr {
+  border-left: 2px solid #33cd5f;
+  border-right: 2px solid #33cd5f; }
+
+.form-error {
+  color: #ef473a; }
