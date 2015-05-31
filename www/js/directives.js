@@ -9,11 +9,8 @@ angular.module('app.directives', [])
         {
           // Perform the action when the user submits the login form
           $scope.addHappiness = function() {
-            var happiness = new Happinesses($scope.happinessData);
-            happiness.$save(function(newHappiness){
-              $scope.happinesses.unshift(newHappiness);
-              $scope.closeAddHappiness();
-            });
+            Happinesses.post($scope.happinessData)
+              .success($scope.closeAddHappiness);
           };
           
           var interval;

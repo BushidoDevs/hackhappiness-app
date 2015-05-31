@@ -49,6 +49,11 @@ angular.module('app', ['ionic', 'ngResource', 'app.config', 'app.controllers', '
 
   .state('app.trending', {
     url: '/trending',
+    resolve: {
+      happinessRange: function(){
+        return [1, 2, 3, 4, 5];
+      }
+    },
     views: {
       'tab-trending': {
         templateUrl: 'templates/tab-trending.html',

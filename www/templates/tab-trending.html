@@ -4,7 +4,7 @@
   </ion-nav-buttons>
   <ion-content>
     <ion-list>
-      <ion-item ng-repeat="happiness in happinesses" type="item-text-wrap">
+      <ion-item ng-repeat="happiness in happinesses track by $index" type="item-text-wrap">
         <div class="padding-vertical text-center">
           <i class="button button-small button-icon icon" ng-repeat="n in happinessRange" ng-class="{
         'ion-happy': n <= happiness.level,
@@ -16,6 +16,7 @@
           <span ng-if="happiness.city">{{happiness.city}}</span>
           <span ng-if="happiness.city && happiness.city">, </span>
           <span ng-if="happiness.country">{{happiness.country}}</span>
+        </p>
       </ion-item>
     </ion-list>
   </ion-content>

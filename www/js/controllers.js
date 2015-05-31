@@ -38,15 +38,15 @@ angular.module('app.controllers', ['uiGmapgoogle-maps'])
   };
 })
 
-.controller('TrendingCtrl', function($scope, $ionicModal, Happinesses) {
+.controller('TrendingCtrl', function($scope, $ionicModal, $state, Users, Happinesses, happinessRange) {
   $scope.happinesses = [];
-  $scope.happinessRange = [1, 2, 3, 4, 5];
+  $scope.happinessRange = happinessRange;
   $scope.happinessRangeMin = $scope.happinessRange[0];
   $scope.happinessRangeMax = $scope.happinessRange[$scope.happinessRange.length - 1];
 
   Happinesses.get({
     $sort: {
-      createdDate: 1
+      createdDate: -1
     }
   }).then(function(response){
     $scope.happinesses = response.data;
