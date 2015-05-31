@@ -1,6 +1,7 @@
 angular.module('app.services', ['dpd'])
 
 .factory('Happinesses', function(dpd) {
+  // note: some controllers go through HapinessesService (offline and online service)
   return dpd.happinesses;
 })
 .factory('GeoService', function($resource) {

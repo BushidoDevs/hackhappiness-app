@@ -38,18 +38,18 @@ angular.module('app.controllers', ['uiGmapgoogle-maps'])
   };
 })
 
-.controller('TrendingCtrl', function($scope, $ionicModal, Happinesses) {
-  $scope.happinesses = [];
+.controller('TrendingCtrl', function($scope, $ionicModal, HappinessesService) {
+  $scope.happinesses = HappinessesService.list;
   $scope.happinessRange = [1, 2, 3, 4, 5];
   $scope.happinessRangeMin = $scope.happinessRange[0];
   $scope.happinessRangeMax = $scope.happinessRange[$scope.happinessRange.length - 1];
 
-  Happinesses.get({
+  HappinessesService.get({
     $sort: {
       createdDate: 1
     }
-  }).then(function(response){
-    $scope.happinesses = response.data;
+  }).then(function(result){
+    $scope.happinesses = result;
   });
 
   // Create the login modal that we will use later
