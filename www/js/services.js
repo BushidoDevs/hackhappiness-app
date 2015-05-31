@@ -1,5 +1,60 @@
-angular.module('app.services', ['dpd'])
+angular.module('app.services', ['dpd', 'ngCookies'])
 
+.factory('Users', function(dpd, $cookies, $q) {
+  var Users = dpd.users;
+  Users.current = function(){
+    var deferred = $q.defer();
+    Users.get('me')
+      .success(function(user){
+        if ( user )
+        {
+          $cookies.sid = user.id;
+          deferred.resolve(user);
+        }
+        else
+        {
+          deferred.reject();
+        }
+      })
+      .error(deferred.reject);
+    return deferred.promise;
+  };
+  Users.register = function(data){
+    var deferred = $q.defer();
+    Users.post(data)
+      .success(function(user){
+        $cookies.sid = user.id
+        Users.current()
+          .then(deferred.resolve)
+          .catch(deferred.reject);
+      })
+      .error(deferred.reject);
+    return deferred.promise;
+  };
+  Users.login = function(data){
+    var deferred = $q.defer();
+    Users.exec('login', data)
+      .success(function(user){
+        $cookies.sid = user.id
+        Users.current()
+          .then(deferred.resolve)
+          .catch(deferred.reject);
+      })
+      .error(deferred.reject);
+    return deferred.promise;
+  };
+  Users.logout = function(){
+    var deferred = $q.defer();
+    Users.exec('logout')
+      .success(function(user){
+        $cookies.sid = null
+        deferred.resolve();
+      })
+      .error(deferred.reject);
+    return deferred.promise;
+  };
+  return Users;
+})
 .factory('Happinesses', function(dpd) {
   return dpd.happinesses;
 })

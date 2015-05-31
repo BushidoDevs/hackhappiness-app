@@ -1,0 +1,27 @@
+<form name="loginForm" ng-submit="doLogin(loginForm)" novalidate>
+	<div class="list">
+		<label class="item item-input item-floating-label" ng-class="{
+			'has-error': loginForm.username.$dirty && loginForm.username.$invalid
+		}">
+			<span class="input-label">Email</span>
+			<input type="text" name="username" ng-model="auth.data.username" ng-minlength="6" ng-maxlength="255" required placeholder="Email">
+		</label>
+		<div class="item form-errors" ng-messages="loginForm.username.$error" role="alert" ng-show="loginForm.username.$dirty && loginForm.username.$invalid">
+			<div class="form-error" ng-message="required">Email is required</div>
+			<div class="form-error" ng-message="minlength, maxlength">Your email must be between 6 and 255 characters long</div>
+		</div>
+		<label class="item item-input item-floating-label" ng-class="{
+			'has-error': loginForm.password.$dirty && loginForm.password.$invalid
+		}">
+			<span class="input-label">Password</span>
+			<input type="password" name="password" ng-model="auth.data.password" ng-minlength="6"required placeholder="Password">
+		</label>
+		<div class="item form-errors" ng-messages="loginForm.password.$error" role="alert" ng-show="loginForm.password.$dirty && loginForm.password.$invalid">
+			<div class="form-error" ng-message="required">Password is required</div>
+			<div class="form-error" ng-message="minlength">Your password must be at least 6 characters long</div>
+		</div>
+		<label class="item">
+			<button class="button button-block button-positive" type="submit">Log in</button>
+		</label>
+	</div>
+</form>

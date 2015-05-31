@@ -1,0 +1,35 @@
+<ion-view view-title="Account">
+	<ion-nav-buttons side="secondary">
+		<button class="button button-clear" ng-click="doLogout()" ng-show="user">Logout</button>
+		<button class="button button-clear" ng-click="login()" ng-hide="user">Login</button>
+	</ion-nav-buttons>
+	<ion-content>
+		<ion-list ng-show="user">
+			<ion-item ng-class="{
+				'item-thumbnail-left': user.img
+			}">
+				<img ng-show="user.img" ng-src="{{user.img}}">
+				<h2>{{user.name}}</h2>
+				<p>{{user.username}}</p>
+			</ion-item>
+			<ion-item class=" item-divider">
+				My happinessess
+			</ion-item>
+			<ion-item ng-repeat="happiness in happinesses track by $index" type="item-text-wrap">
+				<div class="padding-vertical text-center">
+					<i class="button button-small button-icon icon" ng-repeat="n in happinessRange" ng-class="{
+					'ion-happy': n <= happiness.level,
+					'ion-happy-outline': n > happiness.level
+					}"></i>
+				</div>
+				<h2>{{happiness.message}}</h2>
+				<p ng-if="happiness.city && happiness.city">
+					<span ng-if="happiness.city">{{happiness.city}}</span>
+					<span ng-if="happiness.city && happiness.city">, </span>
+					<span ng-if="happiness.country">{{happiness.country}}</span>
+				</p>
+				</div>
+			</ion-item>
+		</ion-list>
+	</ion-content>
+</ion-view>

@@ -1,0 +1,22 @@
+<div class="modal">
+	<ion-header-bar>
+		<h1 class="title">Auth</h1>
+		<div class="buttons">
+			<button class="button button-clear" ng-click="closeAuth()">Close</button>
+		</div>
+	</ion-header-bar>
+	<ion-content>
+		<div ng-include="'templates/modal-auth-'+auth.action+'.html'"></div>
+	</ion-content>
+	<ion-footer-bar>
+		<div class="button-bar">
+		  <button class="button button-clear" ng-click="auth.setAuthAction('login')" ng-class="{
+		  	'active' : auth.action === 'login'
+		  }">Log in</button>
+		  <button class="button button-clear" ng-click="auth.setAuthAction('register')" ng-class="{
+		  	'active' : auth.action === 'register'
+		  }">Register</button>
+		</div>
+	</ion-footer-bar>
+</div>
+</div>

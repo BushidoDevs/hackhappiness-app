@@ -9,7 +9,10 @@
     "angular-resource": "1.3.13",
     "angular-ui-router": "0.2.13",
     "angular-google-maps": "",
-    "angular-dpd": "slively/angular-dpd"
+    "angular-dpd": "slively/angular-dpd",
+    "angular-messages": "1.3.13",
+    "angular-validation-match": "~1.5.0",
+    "angular-cookies": "1.3.13"
   },
   "overrides": {
     "ionic": {

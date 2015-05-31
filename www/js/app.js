@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'app.services' is found in services.js
 // 'app.controllers' is found in controllers.js
-angular.module('app', ['ionic', 'ngResource', 'app.config', 'app.controllers', 'app.services', 'app.directives'])
+angular.module('app', ['ionic', 'ngResource', 'ngMessages', 'ngCookies', 'validation.match', 'app.config', 'app.controllers', 'app.services', 'app.directives'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -67,6 +67,20 @@ angular.module('app', ['ionic', 'ngResource', 'app.config', 'app.controllers', '
       'tab-about': {
         templateUrl: 'templates/tab-about.html',
         controller: 'AboutCtrl'
+      }
+    }
+  })
+  .state('app.account', {
+    url: '/account',
+    resolve: {
+      happinessRange: function(){
+        return [1, 2, 3, 4, 5];
+      }
+    },
+    views: {
+      'tab-account': {
+        templateUrl: 'templates/tab-account.html',
+        controller: 'AccountCtrl'
       }
     }
   });
