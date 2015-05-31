@@ -24,7 +24,11 @@ var install = require("gulp-install");
 var paths = {
   config: ['./config/**/*.json'],
   sass: ['./scss/**/*.scss'],
-  scripts: ['./www/js/**/*.js', '!./www/js/app.bundle.min.js'], // exclude the file we write too
+  scripts: [
+    './www/js/**/*.js',
+    '!./www/js/templates.js',
+    '!./www/js/constants.js'
+  ], // exclude the file we write too
   images: ['./www/img/**/*'],
   templates: ['./www/templates/**/*.html'],
   css: ['./www/css/**/*.min.css'],
@@ -100,7 +104,7 @@ gulp.task('constants', function (done) {
     .pipe(gulp.dest(paths.www + 'js'));
 });
 
-gulp.task('setup', ['templateCache', 'constants']);
+gulp.task('setup', ['sass', 'templateCache', 'constants']);
 
 gulp.task('jshint', function() {
   gulp.src(paths.scripts)
