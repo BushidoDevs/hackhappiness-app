@@ -80,13 +80,12 @@ angular.module('app.controllers', ['uiGmapgoogle-maps'])
   var currentForm;
   var getCurrentUser = function(){
     return Users.current()
-      .then(function(user){
-        $scope.user = user;
-        getUserHappinesses();
-      })
-      .catch(function(data){
-        $scope.login();
-      });
+      .then(setUpAccount)
+      .catch($scope.login);
+  };
+  var setUpAccount = function(user){
+    $scope.user = user;
+    getUserHappinesses();
   };
   var getUserHappinesses = function(){
     Happinesses.get({
@@ -99,11 +98,8 @@ angular.module('app.controllers', ['uiGmapgoogle-maps'])
     });
   };
   var loginSuccess = function(user){
-    $scope.user = user;
+    getCurrentUser().then($scope.closeAuth);
     $scope.auth.data = {};
-    currentForm.$setPristine();
-    getUserHappinesses();
-    $scope.closeAuth();
     currentForm = null;
   };
   var logoutSuccess = function(){
@@ -140,8 +136,20 @@ angular.module('app.controllers', ['uiGmapgoogle-maps'])
     if(form.$valid)
     {
       Users.register($scope.auth.data)
-        .then(loginSuccess)
-        .catch(console.error);
+        .then(function(user){
+          $scope.doLogin(currentForm);
+        })
+        .catch(function(data){
+          if( data && data.errors )
+          {
+            angular.forEach(data.errors, function(error, field){
+              currentForm[field].serverMessage = error;
+              currentForm[field].$setValidity('serverMessage', false);
+            });
+          }
+          console.error(data);
+        })
+        .finally(form.$setPristine);
     }
   };
   $scope.doLogin = function(form){
@@ -150,7 +158,13 @@ angular.module('app.controllers', ['uiGmapgoogle-maps'])
     {
       Users.login($scope.auth.data)
         .then(loginSuccess)
-        .catch(console.error);
+        .catch(function(data){
+          if( data.message ){
+            currentForm.password.$setValidity('serverMessage', false);
+          }
+          console.error(data);
+        })
+        .finally(form.$setPristine);
     }
   };
   $scope.doLogout = function(){

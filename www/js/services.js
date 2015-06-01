@@ -24,9 +24,7 @@ angular.module('app.services', ['dpd', 'ngCookies'])
     Users.post(data)
       .success(function(user){
         $cookies.sid = user.id;
-        Users.current()
-          .then(deferred.resolve)
-          .catch(deferred.reject);
+        deferred.resolve(user);
       })
       .error(deferred.reject);
     return deferred.promise;
@@ -36,9 +34,7 @@ angular.module('app.services', ['dpd', 'ngCookies'])
     Users.exec('login', data)
       .success(function(user){
         $cookies.sid = user.id;
-        Users.current()
-          .then(deferred.resolve)
-          .catch(deferred.reject);
+        deferred.resolve(user);
       })
       .error(deferred.reject);
     return deferred.promise;
