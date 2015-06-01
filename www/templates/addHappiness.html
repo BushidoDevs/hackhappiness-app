@@ -12,6 +12,21 @@
       <span class="input-label">What is making you so happy?</span>
       <textarea type="text" ng-model="happinessData.message" placehoder="#Hackhappines"></textarea>
     </label>
+    <div class="item item-toggle">
+      Geolocale
+      <label class="toggle">
+        <input type="checkbox" ng-model="allowGeolocale" ng-change="toggleAllowGeolocale()">
+        <div class="track">
+          <div class="handle"></div>
+        </div>
+      </label>
+    </div>
+    <div class="item" ng-show="geolocating || happinessData.city || happinessData.country">
+      <ion-spinner ng-show="geolocating"></ion-spinner>
+      <p ng-if="happinessData.city && happinessData.city">
+        <span ng-if="happinessData.city">{{happinessData.city}}</span><span ng-if="happinessData.city && happinessData.city">, </span><span ng-if="happinessData.country">{{happinessData.country}}</span>
+      </p>
+    </div>
     <label class="item">
       <button class="button button-block button-positive" type="submit">Submit</button>
     </label>

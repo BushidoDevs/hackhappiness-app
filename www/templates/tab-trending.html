@@ -1,4 +1,4 @@
-<ion-view view-title="Trendings">
+<ion-view view-title="Trendings {{allowGeolocale}}">
   <ion-nav-buttons side="secondary">
     <button class="button button-icon icon ion-ios-plus-empty" ng-click="openAddHappiness()"></button>
   </ion-nav-buttons>
@@ -13,9 +13,7 @@
         </div>
         <h2>{{happiness.message}}</h2>
         <p ng-if="happiness.city && happiness.city">
-          <span ng-if="happiness.city">{{happiness.city}}</span>
-          <span ng-if="happiness.city && happiness.city">, </span>
-          <span ng-if="happiness.country">{{happiness.country}}</span>
+          <span ng-if="happiness.city">{{happiness.city}}</span><span ng-if="happiness.city && happiness.city">, </span><span ng-if="happiness.country">{{happiness.country}}</span>
         </p>
       </ion-item>
     </ion-list>

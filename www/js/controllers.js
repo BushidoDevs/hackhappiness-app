@@ -67,8 +67,10 @@ angular.module('app.controllers', ['uiGmapgoogle-maps'])
   // Open the modal
   $scope.openAddHappiness = function() {
     Users.current()
-      .then($scope.modal.show)
-      .catch(function(){
+      .then(function(user){
+        $scope.modal.show();
+      })
+      .catch(function(data){
         $state.go('app.account');
       });
   };

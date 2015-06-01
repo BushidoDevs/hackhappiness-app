@@ -56,6 +56,7 @@ angular.module('app.services', ['dpd', 'ngCookies'])
 })
 .factory('GeoService', function($resource) {
   return {
+    geocoder: new google.maps.Geocoder(),
     getCurrentPosition: function(f) {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(position) {
