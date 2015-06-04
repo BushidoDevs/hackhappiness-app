@@ -1,5 +1,5 @@
 angular.module('app.directives', ['app.services'])
-.directive('hackhappinesAddhackhappines', function(Happinesses, GeoService) {
+.directive('hackhappinesAddhackhappines', function(HappinessesService, GeoService) {
   return {
     restrict: 'E',
     replace: true,
@@ -9,7 +9,7 @@ angular.module('app.directives', ['app.services'])
       {
           // Perform the action when the user submits the login form
           $scope.addHappiness = function() {
-            Happinesses.post($scope.happinessData)
+            HappinessesService.post($scope.happinessData)
               .success($scope.closeAddHappiness);
           };
           
@@ -37,17 +37,14 @@ angular.module('app.directives', ['app.services'])
           {
             if( lat === null && lng === null )
             {
-              $scope.happinessData.latlng = null;
+              $scope.happinessData.loc = null;
               $scope.happinessData.city = null;
               $scope.happinessData.country = null;
 
             }
             else
             {
-              $scope.happinessData.latlng = {
-                lat: lat,
-                lng: lng
-              };
+              $scope.happinessData.loc = [lng, lat];
               var latLng = new google.maps.LatLng(lat, lng);
               GeoService.geocoder.geocode({latLng: latLng}, function(response, status) {
                 if (status == google.maps.GeocoderStatus.OK)
@@ -82,7 +79,7 @@ angular.module('app.directives', ['app.services'])
             $scope.happinessData = {
               level: 0,
               message: '',
-              latlng: {}
+              loc: []
             };
             $scope.allowGeolocale = false;
             $scope.geolocating = false;

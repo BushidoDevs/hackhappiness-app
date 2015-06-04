@@ -51,10 +51,7 @@ angular.module('app.services', ['dpd', 'ngCookies'])
   };
   return Users;
 })
-.factory('Happinesses', function(dpd) {
-  return dpd.happinesses;
-})
-.factory('GeoService', function($resource) {
+.factory('GeoService', function($resource, mapConfig) {
   return {
     geocoder: new google.maps.Geocoder(),
     getCurrentPosition: function(f) {
@@ -67,47 +64,34 @@ angular.module('app.services', ['dpd', 'ngCookies'])
       }
     },
     map: {
-      center: {
-        latitude: 41.4,
-        longitude: 2.16
-      },
-      zoom: 14,
+      center: mapConfig.center,
+      zoom: mapConfig.zoom,
       control: {},
       bounds: {}
     }
   };
 })
-.factory('MarkersService', function($resource) {
-  return {
-    getFakeMarkers: function(lat, lng) {
-      var markers = [];
-      var createRandomMarker = function(i, lat, lng, idKey) {
-
-        if (idKey === undefined) {
-          idKey = "id";
-        }
-
-        var latitude = lat + (Math.random() * 0.01);
-        var longitude = lng + (Math.random() * 0.01);
-
+.factory('HappinessesService', function($resource, $q, dpd, mapConfig) {
+  var Happinesses = dpd.happinesses;
+  // Devuelve una lista de happinesses dentro de los límites del mapa que se está mostrando
+  Happinesses.allByBox = function(lowerLeftCoord, upperRightCoord) {
+    var deferred = $q.defer();
+    var query = { "loc": {"$within": {"$box": [lowerLeftCoord, upperRightCoord]}}, $limit: mapConfig.happinessesQueryLimit };
+    Happinesses.get(query, function(happinesses, err) {
+      if (err.errors) deferred.reject();
+      var response = [];
+      happinesses.forEach(function(aHappinesses) {
         var ret = {
-          latitude: latitude,
-          longitude: longitude,
-          title: 'm' + i,
+          id: aHappinesses.id,
+          latitude: aHappinesses.loc[1],
+          longitude: aHappinesses.loc[0],
           icon: 'img/icon.png',
-          options: {
-            labelContent: 'HackHappiness',
-            labelClass: 'label-background'
-          }
         };
-        ret[idKey] = i;
-        return ret;
-      };
-
-      for (var i = 0; i < 3; i++) {
-        markers.push(createRandomMarker(i, lat, lng));
-      }
-      return markers;
-    }
-  };
+        response.push(ret);
+      });
+      deferred.resolve(response);
+    });
+    return deferred.promise;
+  }
+  return Happinesses;
 });
