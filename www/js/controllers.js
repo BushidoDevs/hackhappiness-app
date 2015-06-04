@@ -1,10 +1,10 @@
 angular.module('app.controllers', ['uiGmapgoogle-maps'])
 
-.controller('MapCtrl', function($scope, GeoService, MarkersService, uiGmapIsReady) {
-
+.controller('MapCtrl', function($scope, GeoService, HappinessesService, uiGmapIsReady) {
+  // el mapa está preparado
   uiGmapIsReady.promise(1).then(function(instances) {
     instances.forEach(function(inst) {
-      
+      // la aplicación está preparada
       ionic.Platform.ready(function() { 
         GeoService.getCurrentPosition(function (position) {
           $scope.map.control.refresh({
@@ -12,18 +12,21 @@ angular.module('app.controllers', ['uiGmapgoogle-maps'])
               longitude: position.coords.longitude
             }
           );
+          updateHappinesses();
         });
       });
-
     });
   });
 
-  var updateMarkers = function(e) {
-
+  var updateHappinesses = function() {
     if (typeof $scope.markers.control.updateModels == 'function') {
-      $scope.markers.control.updateModels(
-        MarkersService.getFakeMarkers(e.data.map.center.lat(), e.data.map.center.lng())
-      );
+      setTimeout(function() {
+          var bounds = $scope.map.bounds;
+          HappinessesService.allByBox([bounds.southwest.longitude, bounds.southwest.latitude], 
+                                      [bounds.northeast.longitude, bounds.northeast.latitude])
+            .then($scope.markers.control.updateModels)
+            .catch(console.error);
+        }, 500);
     }
   };
   
@@ -33,18 +36,18 @@ angular.module('app.controllers', ['uiGmapgoogle-maps'])
   };
   $scope.map = GeoService.map;
   $scope.map.events = {
-    // Al realizar un drag del mapa, se actualizan los markers.
-    'bounds_changed' : updateMarkers
+    // Al realizar un drag del mapa, se actualizan los happinesses.
+    'dragend': updateHappinesses
   };
 })
 
-.controller('TrendingCtrl', function($scope, $ionicModal, $state, Users, Happinesses, happinessRange) {
+.controller('TrendingCtrl', function($scope, $ionicModal, $state, Users, HappinessesService, happinessRange) {
   $scope.happinesses = [];
   $scope.happinessRange = happinessRange;
   $scope.happinessRangeMin = $scope.happinessRange[0];
   $scope.happinessRangeMax = $scope.happinessRange[$scope.happinessRange.length - 1];
 
-  Happinesses.get({
+  HappinessesService.get({
     $sort: {
       createdDate: -1
     }
@@ -78,7 +81,7 @@ angular.module('app.controllers', ['uiGmapgoogle-maps'])
 
 .controller('AboutCtrl', function($scope) {})
 
-.controller('AccountCtrl', function($scope, $ionicModal, $cookies, Users, Happinesses, happinessRange) {
+.controller('AccountCtrl', function($scope, $ionicModal, $cookies, Users, HappinessesService, happinessRange) {
   var currentForm;
   var getCurrentUser = function(){
     return Users.current()
@@ -90,7 +93,7 @@ angular.module('app.controllers', ['uiGmapgoogle-maps'])
     getUserHappinesses();
   };
   var getUserHappinesses = function(){
-    Happinesses.get({
+    HappinessesService.get({
       user: $scope.user.id,
       $sort: {
         createdDate: -1
