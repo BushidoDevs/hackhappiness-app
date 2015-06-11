@@ -7699,3 +7699,107 @@ a.button {
 /** Styling for the error text and container **/
 .form-error {
   color: #ef473a; }
+
+.shape-map {
+  background: rgba(204, 204, 204, 0.7);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1; }
+  .shape-map button {
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    -ms-transition: all .3s;
+    -o-transition: all .3s;
+    transition: all .3s;
+    width: 100px;
+    height: 100px;
+    border-radius: 100%;
+    border: none;
+    position: absolute;
+    z-index: 99;
+    top: 50%;
+    left: 50%;
+    margin: -50px;
+    color: white;
+    padding: 0; }
+    .shape-map button i.icon {
+      width: 100px;
+      height: 100px;
+      border-radius: 100%;
+      display: block;
+      padding-top: 25px;
+      background: #FFC107;
+      box-shadow: 0 0 10px #C2950F; }
+      .shape-map button i.icon:before {
+        font-size: 70px; }
+    .shape-map button:before {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      content: ' ';
+      height: 100%;
+      background-color: #FFA000;
+      z-index: -1;
+      border-radius: 100%;
+      transition: all 1s;
+      transform: scale(0.9); }
+    .shape-map button:not(.iconGrow_0) {
+      background: #FFC107;
+      box-shadow: 0 0 0 #C2950F; }
+    .shape-map button.iconGrow_1:before {
+      transform: scale(1.5); }
+    .shape-map button.iconGrow_2:before {
+      transition: all .7s;
+      transform: scale(2); }
+    .shape-map button.iconGrow_3:before {
+      transition: all .5s;
+      transform: scale(2.5); }
+    .shape-map button.iconGrow_4:before {
+      transition: all .3s;
+      transform: scale(3); }
+    .shape-map button.iconGrow_5:before {
+      transition: all .3s;
+      transform: scale(15); }
+
+.meter-zone {
+  position: absolute;
+  top: 20px;
+  height: 50px;
+  width: 90%;
+  z-index: 999;
+  left: 5%;
+  opacity: 0;
+  transition: all .3s; }
+  .meter-zone.visible {
+    opacity: 1; }
+  .meter-zone .meter-icons {
+    height: 45px; }
+    .meter-zone .meter-icons .meter-face {
+      width: 20%;
+      height: 45px;
+      float: left;
+      opacity: 0;
+      background: blue;
+      transition: all .3s; }
+      .meter-zone .meter-icons .meter-face.active {
+        opacity: 1; }
+      .meter-zone .meter-icons .meter-face span {
+        color: white;
+        font-size: 30px;
+        transform: rotate(90deg);
+        display: block;
+        width: 100%;
+        height: 45px;
+        text-align: center;
+        line-height: 45px; }
+  .meter-zone .meter-progress {
+    height: 5px;
+    background-color: white; }
+    .meter-zone .meter-progress .meter-bar {
+      transition: all .7s;
+      height: 5px;
+      background-color: green; }

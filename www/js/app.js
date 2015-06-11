@@ -47,13 +47,23 @@ angular.module('app', ['ionic', 'ngResource', 'ngMessages', 'ngCookies', 'valida
     }
   })
 
-  .state('app.trending', {
-    url: '/trending',
+  .state('app.home', {
+    url: '/home',
     resolve: {
       happinessRange: function(){
         return [1, 2, 3, 4, 5];
       }
     },
+    views: {
+      'tab-home': {
+        templateUrl: 'templates/tab-addHappiness.html',
+        controller: 'HomeCtrl'
+      }
+    }
+  })
+
+  .state('app.trending', {
+    url: '/trending',
     views: {
       'tab-trending': {
         templateUrl: 'templates/tab-trending.html',
@@ -86,6 +96,6 @@ angular.module('app', ['ionic', 'ngResource', 'ngMessages', 'ngCookies', 'valida
   });
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/map');
+  $urlRouterProvider.otherwise('/home');
 
 });
