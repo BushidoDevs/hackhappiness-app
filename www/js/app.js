@@ -59,7 +59,8 @@ angular.module('app', ['ionic', 'ngResource', 'ngMessages', 'ngCookies', 'valida
         templateUrl: 'templates/tab-addHappiness.html',
         controller: 'HomeCtrl'
       }
-    }
+    },
+    cache: false
   })
 
   .state('app.trending', {

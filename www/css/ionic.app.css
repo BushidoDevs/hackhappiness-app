@@ -7675,6 +7675,196 @@ a.button {
   -webkit-transition-duration: 0s;
   transition-duration: 0s; }
 
+@-webkit-keyframes iconBounce {
+  0% {
+    -moz-transform: translateY(0%);
+    -o-transform: translateY(0%);
+    -ms-transform: translateY(0%);
+    -webkit-transform: translateY(0%);
+    transform: translateY(0%); }
+
+  50% {
+    -moz-transform: translateY(-20%);
+    -o-transform: translateY(-20%);
+    -ms-transform: translateY(-20%);
+    -webkit-transform: translateY(-20%);
+    transform: translateY(-20%); } }
+
+@-moz-keyframes iconBounce {
+  0% {
+    -moz-transform: translateY(0%);
+    -o-transform: translateY(0%);
+    -ms-transform: translateY(0%);
+    -webkit-transform: translateY(0%);
+    transform: translateY(0%); }
+
+  50% {
+    -moz-transform: translateY(-20%);
+    -o-transform: translateY(-20%);
+    -ms-transform: translateY(-20%);
+    -webkit-transform: translateY(-20%);
+    transform: translateY(-20%); } }
+
+@-ms-keyframes iconBounce {
+  0% {
+    -moz-transform: translateY(0%);
+    -o-transform: translateY(0%);
+    -ms-transform: translateY(0%);
+    -webkit-transform: translateY(0%);
+    transform: translateY(0%); }
+
+  50% {
+    -moz-transform: translateY(-20%);
+    -o-transform: translateY(-20%);
+    -ms-transform: translateY(-20%);
+    -webkit-transform: translateY(-20%);
+    transform: translateY(-20%); } }
+
+@-o-keyframes iconBounce {
+  0% {
+    -moz-transform: translateY(0%);
+    -o-transform: translateY(0%);
+    -ms-transform: translateY(0%);
+    -webkit-transform: translateY(0%);
+    transform: translateY(0%); }
+
+  50% {
+    -moz-transform: translateY(-20%);
+    -o-transform: translateY(-20%);
+    -ms-transform: translateY(-20%);
+    -webkit-transform: translateY(-20%);
+    transform: translateY(-20%); } }
+
+@keyframes iconBounce {
+  0% {
+    -moz-transform: translateY(0%);
+    -o-transform: translateY(0%);
+    -ms-transform: translateY(0%);
+    -webkit-transform: translateY(0%);
+    transform: translateY(0%); }
+
+  50% {
+    -moz-transform: translateY(-20%);
+    -o-transform: translateY(-20%);
+    -ms-transform: translateY(-20%);
+    -webkit-transform: translateY(-20%);
+    transform: translateY(-20%); } }
+
+@-webkit-keyframes iconOut {
+  0% {
+    -moz-transform: translateY(0%);
+    -o-transform: translateY(0%);
+    -ms-transform: translateY(0%);
+    -webkit-transform: translateY(0%);
+    transform: translateY(0%); }
+
+  40% {
+    -moz-transform: translateY(20%);
+    -o-transform: translateY(20%);
+    -ms-transform: translateY(20%);
+    -webkit-transform: translateY(20%);
+    transform: translateY(20%); }
+
+  40% {
+    -moz-transform: translateY(-100%);
+    -o-transform: translateY(-100%);
+    -ms-transform: translateY(-100%);
+    -webkit-transform: translateY(-100%);
+    transform: translateY(-100%);
+    opacity: 0; } }
+
+@-moz-keyframes iconOut {
+  0% {
+    -moz-transform: translateY(0%);
+    -o-transform: translateY(0%);
+    -ms-transform: translateY(0%);
+    -webkit-transform: translateY(0%);
+    transform: translateY(0%); }
+
+  40% {
+    -moz-transform: translateY(20%);
+    -o-transform: translateY(20%);
+    -ms-transform: translateY(20%);
+    -webkit-transform: translateY(20%);
+    transform: translateY(20%); }
+
+  40% {
+    -moz-transform: translateY(-100%);
+    -o-transform: translateY(-100%);
+    -ms-transform: translateY(-100%);
+    -webkit-transform: translateY(-100%);
+    transform: translateY(-100%);
+    opacity: 0; } }
+
+@-ms-keyframes iconOut {
+  0% {
+    -moz-transform: translateY(0%);
+    -o-transform: translateY(0%);
+    -ms-transform: translateY(0%);
+    -webkit-transform: translateY(0%);
+    transform: translateY(0%); }
+
+  40% {
+    -moz-transform: translateY(20%);
+    -o-transform: translateY(20%);
+    -ms-transform: translateY(20%);
+    -webkit-transform: translateY(20%);
+    transform: translateY(20%); }
+
+  40% {
+    -moz-transform: translateY(-100%);
+    -o-transform: translateY(-100%);
+    -ms-transform: translateY(-100%);
+    -webkit-transform: translateY(-100%);
+    transform: translateY(-100%);
+    opacity: 0; } }
+
+@-o-keyframes iconOut {
+  0% {
+    -moz-transform: translateY(0%);
+    -o-transform: translateY(0%);
+    -ms-transform: translateY(0%);
+    -webkit-transform: translateY(0%);
+    transform: translateY(0%); }
+
+  40% {
+    -moz-transform: translateY(20%);
+    -o-transform: translateY(20%);
+    -ms-transform: translateY(20%);
+    -webkit-transform: translateY(20%);
+    transform: translateY(20%); }
+
+  40% {
+    -moz-transform: translateY(-100%);
+    -o-transform: translateY(-100%);
+    -ms-transform: translateY(-100%);
+    -webkit-transform: translateY(-100%);
+    transform: translateY(-100%);
+    opacity: 0; } }
+
+@keyframes iconOut {
+  0% {
+    -moz-transform: translateY(0%);
+    -o-transform: translateY(0%);
+    -ms-transform: translateY(0%);
+    -webkit-transform: translateY(0%);
+    transform: translateY(0%); }
+
+  40% {
+    -moz-transform: translateY(20%);
+    -o-transform: translateY(20%);
+    -ms-transform: translateY(20%);
+    -webkit-transform: translateY(20%);
+    transform: translateY(20%); }
+
+  40% {
+    -moz-transform: translateY(-100%);
+    -o-transform: translateY(-100%);
+    -ms-transform: translateY(-100%);
+    -webkit-transform: translateY(-100%);
+    transform: translateY(-100%);
+    opacity: 0; } }
+
 /* Empty. Add your own CSS if you like */
 .fullHeight .scroll, .fullHeight .fullHeight, .angular-google-map, .angular-google-map-container {
   height: 100%; }
@@ -7700,6 +7890,17 @@ a.button {
 .form-error {
   color: #ef473a; }
 
+.bar.bar-header {
+  background: #FFE75E; }
+  .bar.bar-header .title {
+    color: #262626; }
+
+.tab-nav.tabs {
+  background: #FFE75E; }
+
+ion-tabs.tabs-color-active-positive .tab-item.tab-item-active, ion-tabs.tabs-color-active-positive .tab-item.active, ion-tabs.tabs-color-active-positive .tab-item.activated {
+  color: #262626; }
+
 .shape-map {
   background: rgba(204, 204, 204, 0.7);
   position: absolute;
@@ -7708,6 +7909,8 @@ a.button {
   right: 0;
   bottom: 0;
   z-index: 1; }
+  .shape-map.transparent {
+    background: rgba(204, 204, 204, 0); }
   .shape-map button {
     -webkit-transition: all .3s;
     -moz-transition: all .3s;
@@ -7723,7 +7926,7 @@ a.button {
     top: 50%;
     left: 50%;
     margin: -50px;
-    color: white;
+    color: #262626;
     padding: 0; }
     .shape-map button i.icon {
       width: 100px;
@@ -7731,10 +7934,33 @@ a.button {
       border-radius: 100%;
       display: block;
       padding-top: 25px;
-      background: #FFC107;
-      box-shadow: 0 0 10px #C2950F; }
+      background: #FFE75E;
+      box-shadow: 0 0 10px #C2950F;
+      -webkit-transition: all .3s;
+      -moz-transition: all .3s;
+      -ms-transition: all .3s;
+      -o-transition: all .3s;
+      transition: all .3s; }
+      .shape-map button i.icon:not(.iconGrow_0) {
+        box-shadow: 0 0 0 transparent; }
       .shape-map button i.icon:before {
         font-size: 70px; }
+    .shape-map button.iconGrow_5.active i {
+      animation: iconBounce 1s infinite; }
+    .shape-map button.iconGrow_6.gone {
+      position: fixed;
+      -webkit-transition: all 1000ms cubic-bezier(1, 0, 0, 1);
+      -moz-transition: all 1000ms cubic-bezier(1, 0, 0, 1);
+      -o-transition: all 1000ms cubic-bezier(1, 0, 0, 1);
+      transition: all 1000ms cubic-bezier(1, 0, 0, 1);
+      /* easeInOutExpo */
+      -webkit-transition-timing-function: cubic-bezier(1, 0, 0, 1);
+      -moz-transition-timing-function: cubic-bezier(1, 0, 0, 1);
+      -o-transition-timing-function: cubic-bezier(1, 0, 0, 1);
+      transition-timing-function: cubic-bezier(1, 0, 0, 1);
+      /* easeInOutExpo */
+      top: 100%;
+      margin-top: 120px; }
     .shape-map button:before {
       position: absolute;
       top: 0;
@@ -7742,33 +7968,38 @@ a.button {
       width: 100%;
       content: ' ';
       height: 100%;
-      background-color: #FFA000;
       z-index: -1;
       border-radius: 100%;
       transition: all 1s;
       transform: scale(0.9); }
-    .shape-map button:not(.iconGrow_0) {
-      background: #FFC107;
-      box-shadow: 0 0 0 #C2950F; }
     .shape-map button.iconGrow_1:before {
+      background-color: rgba(255, 231, 94, 0.3);
       transform: scale(1.5); }
     .shape-map button.iconGrow_2:before {
+      background-color: rgba(255, 231, 94, 0.5);
       transition: all .7s;
       transform: scale(2); }
     .shape-map button.iconGrow_3:before {
+      background-color: rgba(255, 231, 94, 0.6);
       transition: all .5s;
       transform: scale(2.5); }
     .shape-map button.iconGrow_4:before {
+      background-color: rgba(255, 231, 94, 0.7);
       transition: all .3s;
       transform: scale(3); }
     .shape-map button.iconGrow_5:before {
+      background-color: #ffe75e;
       transition: all .3s;
       transform: scale(15); }
+    .shape-map button.iconGrow_6:before {
+      background-color: #ffe75e;
+      transition: all .3s;
+      transform: scale(.9); }
 
 .meter-zone {
   position: absolute;
   top: 20px;
-  height: 50px;
+  height: 55px;
   width: 90%;
   z-index: 999;
   left: 5%;
@@ -7782,24 +8013,44 @@ a.button {
       width: 20%;
       height: 45px;
       float: left;
-      opacity: 0;
-      background: blue;
-      transition: all .3s; }
+      opacity: 0.2;
+      transition: all .3s;
+      text-align: center; }
       .meter-zone .meter-icons .meter-face.active {
         opacity: 1; }
-      .meter-zone .meter-icons .meter-face span {
-        color: white;
-        font-size: 30px;
-        transform: rotate(90deg);
-        display: block;
-        width: 100%;
+      .meter-zone .meter-icons .meter-face:before {
+        content: '';
+        width: 45px;
         height: 45px;
-        text-align: center;
-        line-height: 45px; }
+        display: inline-block;
+        background-size: auto 100%;
+        border-radius: 100%;
+        background-color: #FFE75E; }
+      .meter-zone .meter-icons .meter-face.face_1:before {
+        background-image: url(../img/smiley/happy_1.png); }
+      .meter-zone .meter-icons .meter-face.face_2:before {
+        background-image: url(../img/smiley/happy_2.png); }
+      .meter-zone .meter-icons .meter-face.face_3:before {
+        background-image: url(../img/smiley/happy_3.png); }
+      .meter-zone .meter-icons .meter-face.face_4:before {
+        background-image: url(../img/smiley/happy_4.png); }
+      .meter-zone .meter-icons .meter-face.face_5:before {
+        background-image: url(../img/smiley/happy_5.png); }
   .meter-zone .meter-progress {
     height: 5px;
-    background-color: white; }
+    margin: 5px 10% 0; }
     .meter-zone .meter-progress .meter-bar {
       transition: all .7s;
       height: 5px;
-      background-color: green; }
+      background-color: #FFE75E;
+      border-radius: 100px; }
+      .meter-zone .meter-progress .meter-bar.st_1 {
+        width: 5px; }
+      .meter-zone .meter-progress .meter-bar.st_2 {
+        width: 25%; }
+      .meter-zone .meter-progress .meter-bar.st_3 {
+        width: 50%; }
+      .meter-zone .meter-progress .meter-bar.st_4 {
+        width: 75%; }
+      .meter-zone .meter-progress .meter-bar.st_5 {
+        width: 100%; }

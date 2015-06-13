@@ -35,6 +35,11 @@ angular.module('app.controllers', ['uiGmapgoogle-maps'])
     control: {}
   };
   $scope.map = GeoService.map;
+  $scope.map.options =  {
+    disableDefaultUI: !0,
+    mapTypeControl: !1,
+    tilt: 45
+  };
   $scope.map.events = {
     // Al realizar un drag del mapa, se actualizan los happinesses.
     'dragend': updateHappinesses
@@ -72,32 +77,16 @@ angular.module('app.controllers', ['uiGmapgoogle-maps'])
                       longitude: position.coords.longitude
                     }
                 );
-                updateHappinesses();
               });
             });
           });
         });
 
-        var updateHappinesses = function() {
-          if (typeof $scope.markers.control.updateModels == 'function') {
-            setTimeout(function() {
-              var bounds = $scope.map.bounds;
-              HappinessesService.allByBox([bounds.southwest.longitude, bounds.southwest.latitude],
-                  [bounds.northeast.longitude, bounds.northeast.latitude])
-                  .then($scope.markers.control.updateModels)
-                  .catch(console.error);
-            }, 500);
-          }
-        };
-
-        $scope.markers = {
-          models: [],
-          control: {}
-        };
         $scope.map = GeoService.map;
-        $scope.map.events = {
-          // Al realizar un drag del mapa, se actualizan los happinesses.
-          'dragend': updateHappinesses
+        $scope.map.options =  {
+          disableDefaultUI: !0,
+          mapTypeControl: !1,
+          tilt: 45
         };
 
       Users.current()

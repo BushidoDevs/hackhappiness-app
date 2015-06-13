@@ -1,8 +1,9 @@
 // COLORS
-$happyButton: #FFC107;
+$happyButton: #FFE75E;
 $happyButtonSize: 70px;
 $happyButtonShadow: #C2950F;
 $happyButtonExpansion: #FFA000;
+$darkBlack: #262626;
 
 @mixin transition($transition) {
   -webkit-transition: $transition;
@@ -10,6 +11,14 @@ $happyButtonExpansion: #FFA000;
   -ms-transition: $transition;
   -o-transition: $transition;
   transition: $transition;
+}
+
+@mixin transform($transforms...) {
+  -moz-transform: $transforms;
+  -o-transform: $transforms;
+  -ms-transform: $transforms;
+  -webkit-transform: $transforms;
+  transform: $transforms;
 }
 
 @mixin expoOut($time: 500) {
@@ -22,6 +31,48 @@ $happyButtonExpansion: #FFA000;
   -moz-transition-timing-function: cubic-bezier(1.000, 0.000, 0.000, 1.000);
   -o-transition-timing-function: cubic-bezier(1.000, 0.000, 0.000, 1.000);
   transition-timing-function: cubic-bezier(1.000, 0.000, 0.000, 1.000); /* easeInOutExpo */
+}
+
+@mixin keyframes($animation-name) {
+  @-webkit-keyframes $animation-name {
+    @content;
+  }
+  @-moz-keyframes $animation-name {
+    @content;
+  }
+  @-ms-keyframes $animation-name {
+    @content;
+  }
+  @-o-keyframes $animation-name {
+    @content;
+  }
+  @keyframes $animation-name {
+    @content;
+  }
+}
+
+@include keyframes(iconBounce) {
+  0% {
+    @include transform(translateY(0%));
+  }
+  50% {
+    @include transform(translateY(-20%));
+  }
+
+}
+
+@include keyframes(iconOut) {
+  0% {
+    @include transform(translateY(0%));
+  }
+  40% {
+    @include transform(translateY(20%));
+  }
+  40% {
+    @include transform(translateY(-100%));
+    opacity: 0;
+  }
+
 }
 
 /* Empty. Add your own CSS if you like */
@@ -58,6 +109,23 @@ $happyButtonExpansion: #FFA000;
   color: $assertive;
 }
 
+.bar.bar-header {
+  background: $happyButton;
+  .title {
+    color: $darkBlack;
+  }
+}
+
+.tab-nav.tabs {
+  background: $happyButton;
+}
+
+ion-tabs.tabs-color-active-positive .tab-item.tab-item-active,
+ion-tabs.tabs-color-active-positive .tab-item.active,
+ion-tabs.tabs-color-active-positive .tab-item.activated {
+  color: $darkBlack;
+}
+
 .shape-map {
   background: rgba(#ccc, 0.7);
   position: absolute;
@@ -66,6 +134,9 @@ $happyButtonExpansion: #FFA000;
   right: 0;
   bottom: 0;
   z-index: 1;
+  &.transparent{
+    background: rgba(#ccc, 0);
+  }
   button {
     @include transition(all .3s);
     width: 100px;
@@ -77,7 +148,7 @@ $happyButtonExpansion: #FFA000;
     top: 50%;
     left: 50%;
     margin: -50px;
-    color: white;
+    color: $darkBlack;
     padding: 0;
 
     i.icon {
@@ -88,11 +159,29 @@ $happyButtonExpansion: #FFA000;
       padding-top: 25px;
       background: $happyButton;
       box-shadow: 0 0 10px $happyButtonShadow;
+      //@include expoOut(700);
+      @include transition(all .3s);
+      &:not(.iconGrow_0) {
+        //background: $happyButton;
+        box-shadow: 0 0 0 transparent;
+      }
       &:before {
-
         font-size: $happyButtonSize;
       }
     }
+
+    &.iconGrow_5.active {
+      i {
+        animation: iconBounce 1s infinite;
+      }
+    }
+    &.iconGrow_6.gone {
+      position: fixed;
+      @include expoOut(1000);
+      top: 100%;
+      margin-top: 120px;
+    }
+
     &:before {
       position: absolute;
       top: 0;
@@ -100,36 +189,41 @@ $happyButtonExpansion: #FFA000;
       width: 100%;
       content: ' ';
       height: 100%;
-      background-color: $happyButtonExpansion;
       z-index: -1;
       border-radius: 100%;
       //@include expoOut(1500);
       transition: all 1s;
       transform: scale(0.9);
     }
-    &:not(.iconGrow_0) {
-      background: $happyButton;
-      box-shadow: 0 0 0 $happyButtonShadow;
-    }
 
     &.iconGrow_1:before {
+      background-color: rgba($happyButton, 0.3);
       transform: scale(1.5);
     }
     &.iconGrow_2:before {
+      background-color: rgba($happyButton, 0.5);
       transition: all .7s;
       transform: scale(2);
     }
     &.iconGrow_3:before {
+      background-color: rgba($happyButton, 0.6);
       transition: all .5s;
       transform: scale(2.5);
     }
     &.iconGrow_4:before {
+      background-color: rgba($happyButton, 0.7);
       transition: all .3s;
       transform: scale(3);
     }
     &.iconGrow_5:before {
+      background-color: rgba($happyButton, 1);
       transition: all .3s;
       transform: scale(15);
+    }
+    &.iconGrow_6:before {
+      background-color: rgba($happyButton, 1);
+      transition: all .3s;
+      transform: scale(.9);
     }
   }
 }
@@ -137,13 +231,13 @@ $happyButtonExpansion: #FFA000;
 .meter-zone {
   position: absolute;
   top: 20px;
-  height: 50px;
+  height: 55px;
   width: 90%;
   z-index: 999;
   left: 5%;
   opacity: 0;
   transition: all .3s;
-  &.visible{
+  &.visible {
     opacity: 1;
   }
   .meter-icons {
@@ -152,31 +246,65 @@ $happyButtonExpansion: #FFA000;
       width: 20%;
       height: 45px;
       float: left;
-      opacity: 0;
-      background: blue;
+      opacity: 0.2;
       transition: all .3s;
+      text-align: center;
       &.active {
         opacity: 1;
+        &:before {
+          //box-shadow: 0 0 0 1px $darkBlack;
+        }
       }
-      span {
-        color: white;
-        font-size: 30px;
-        transform: rotate(90deg);
-        display: block;
-        width: 100%;
+      &:before {
+        content: '';
+        width: 45px;
         height: 45px;
-        text-align: center;
-        line-height: 45px;
+        display: inline-block;
+        background-size: auto 100%;
+        border-radius: 100%;
+        background-color: $happyButton;
+      }
+      &.face_1:before {
+        background-image: url(../img/smiley/happy_1.png);
+      }
+      &.face_2:before {
+        background-image: url(../img/smiley/happy_2.png);
+      }
+      &.face_3:before {
+        background-image: url(../img/smiley/happy_3.png);
+      }
+      &.face_4:before {
+        background-image: url(../img/smiley/happy_4.png);
+      }
+      &.face_5:before {
+        background-image: url(../img/smiley/happy_5.png);
       }
     }
   }
   .meter-progress {
     height: 5px;
-    background-color: white;
+    margin: 5px 10% 0;
     .meter-bar {
       transition: all .7s;
       height: 5px;
-      background-color: green;
+      background-color: $happyButton;
+      border-radius: 100px;
+      &.st_1 {
+        width: 5px;
+      }
+      &.st_2 {
+        width: 25%;
+      }
+      &.st_3 {
+        width: 50%;
+      }
+      &.st_4 {
+        width: 75%;
+      }
+      &.st_5 {
+        width: 100%;
+      }
     }
   }
 }
+

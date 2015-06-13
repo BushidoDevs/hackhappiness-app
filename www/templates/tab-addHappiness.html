@@ -2,29 +2,23 @@
     <ion-content class="fullHeight">
         <div class="meter-zone" ng-class="{'visible': happinessData.level}">
             <div class="meter-icons">
-                <div class="meter-face face_1" ng-class="{'active' : happinessData.level == 1}"><span>:)</span></div>
-                <div class="meter-face face_2" ng-class="{'active' : happinessData.level == 2}"><span>;)</span></div>
-                <div class="meter-face face_3" ng-class="{'active' : happinessData.level == 3}"><span>:P</span></div>
-                <div class="meter-face face_4" ng-class="{'active' : happinessData.level == 4}"><span>:D</span></div>
-                <div class="meter-face face_5" ng-class="{'active' : happinessData.level == 5}"><span>XD</span></div>
+                <div class="meter-face face_1" ng-class="{'active' : happinessData.level == 1}"></div>
+                <div class="meter-face face_2" ng-class="{'active' : happinessData.level == 2}"></div>
+                <div class="meter-face face_3" ng-class="{'active' : happinessData.level == 3}"></div>
+                <div class="meter-face face_4" ng-class="{'active' : happinessData.level == 4}"></div>
+                <div class="meter-face face_5" ng-class="{'active' : happinessData.level == 5}"></div>
             </div>
             <div class="meter-progress">
-                <div class="meter-bar" style="width: {{happinessData.level*20}}%"></div>
+                <div class="meter-bar st_{{happinessData.level}}"></div>
             </div>
         </div>
         <hackhappines-addhackhappines></hackhappines-addhackhappines>
         <ui-gmap-google-map class="fullHeight" center='map.center'
                             zoom='map.zoom'
                             control='map.control'
+                            options='map.options'
                             bounds='map.bounds'
-                            events='map.events'
                             pan="true">
-            <ui-gmap-markers models="markers.models"
-                             coords="'self'"
-                             icon="'icon'"
-                             control="markers.control"
-                             options="'options'">
-            </ui-gmap-markers>
         </ui-gmap-google-map>
     </ion-content>
 </ion-view>

@@ -1,5 +1,5 @@
 angular.module('app.directives', ['app.services'])
-.directive('hackhappinesAddhackhappines', function(HappinessesService, GeoService, $interval) {
+.directive('hackhappinesAddhackhappines', function(HappinessesService, GeoService, $interval, $state) {
   return {
     restrict: 'E',
     transclude: true,
@@ -8,10 +8,26 @@ angular.module('app.directives', ['app.services'])
     compile: function(element, attr) {
       return function($scope)
       {
+          $scope.isPositionSended = false;
+
           // Perform the action when the user submits the login form
           $scope.addHappiness = function() {
-              HappinessesService.post($scope.happinessData)
-                  .success($scope.closeAddHappiness);
+              GeoService.getCurrentPosition(function(position){
+                  if(position.coords)
+                  {
+                      _setLocation(position.coords.latitude, position.coords.longitude);
+                      HappinessesService.post($scope.happinessData)
+                          .success(function(){
+                              $scope.initHappinesData();
+                              $scope.isHappinessLevelSet = false;
+                              $scope.isPositionSended = true;
+                              setTimeout(function(){
+                                  $state.go('app.map');
+                              }, 1000);
+                          });
+                  }
+                  $scope.geolocating = false;
+              });
           };
 
           var interval;
@@ -24,6 +40,7 @@ angular.module('app.directives', ['app.services'])
           {
               $interval.cancel(interval);
               $scope.isHappinessLevelSet = true;
+              $scope.addHappiness();
           };
 
           var _increaseHappinessInterval = 500;
@@ -79,7 +96,7 @@ angular.module('app.directives', ['app.services'])
           {
               $scope.happinessData = {
                   level: 0,
-                  message: '',
+                  message: ' ',
                   loc: []
               };
               $scope.allowGeolocale = false;
