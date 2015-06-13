@@ -16,15 +16,21 @@ angular.module('app.directives', ['app.services'])
                   if(position.coords)
                   {
                       _setLocation(position.coords.latitude, position.coords.longitude);
-                      HappinessesService.post($scope.happinessData)
-                          .success(function(){
-                              $scope.initHappinesData();
-                              $scope.isHappinessLevelSet = false;
-                              $scope.isPositionSended = true;
-                              setTimeout(function(){
-                                  $state.go('app.map');
-                              }, 1000);
-                          });
+
+                      GeoService.getStreetName(position.coords,
+                          function onSuccess(info){
+                              $scope.happinessData.city = info.data.results[0].formatted_address;
+                              HappinessesService.post($scope.happinessData)
+                                  .success(function(){
+                                      $scope.initHappinesData();
+                                      $scope.isHappinessLevelSet = false;
+                                      $scope.isPositionSended = true;
+                                      setTimeout(function(){
+                                          $state.go('app.map');
+                                      }, 1000);
+                                  });
+                          }
+                      );
                   }
                   $scope.geolocating = false;
               });

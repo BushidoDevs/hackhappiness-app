@@ -46,56 +46,67 @@ angular.module('app.controllers', ['uiGmapgoogle-maps'])
   };
 })
 
-.controller('TrendingCtrl', function($scope, $ionicModal, $state, Users, HappinessesService, happinessRange) {
+.controller('TrendingCtrl', function($scope, $ionicModal, $state, Users, HappinessesService) {
   $scope.happinesses = [];
+  $scope.happinessRange = [1, 2, 3, 4, 5];
 
-  HappinessesService.get({
-    $sort: {
-      createdDate: -1
-    }
-  }).then(function(response){
-    $scope.happinesses = response.data;
-  });
+  $scope.loadHappiness = function() {
+    HappinessesService.get({
+      $sort: {
+        createdDate: -1
+      }
+    }).then(function (response) {
+      $scope.happinesses = response.data;
+      $scope.$broadcast('scroll.refreshComplete');
+    });
+  };
+
+  $scope.loadHappiness();
 
 })
 
 .controller('AboutCtrl', function($scope) {})
 
-.controller('HomeCtrl', function($scope, Users, HappinessesService, happinessRange, $state, uiGmapIsReady, GeoService) {
-      $scope.happinessRange = happinessRange;
-      $scope.happinessRangeMin = $scope.happinessRange[0];
-      $scope.happinessRangeMax = $scope.happinessRange[$scope.happinessRange.length - 1];
+.controller('HomeCtrl', function($scope, Users, HappinessesService, happinessRange, $state, uiGmapIsReady, GeoService, $timeout) {
+  $scope.happinessRange = happinessRange;
+  $scope.happinessRangeMin = $scope.happinessRange[0];
+  $scope.happinessRangeMax = $scope.happinessRange[$scope.happinessRange.length - 1];
 
-        // el mapa está preparado
-        uiGmapIsReady.promise(1).then(function(instances) {
-          instances.forEach(function(inst) {
-            // la aplicación está preparada
-            ionic.Platform.ready(function() {
-              GeoService.getCurrentPosition(function (position) {
-                $scope.map.control.refresh({
-                      latitude: position.coords.latitude,
-                      longitude: position.coords.longitude
-                    }
-                );
-              });
-            });
+    // el mapa está preparado
+    uiGmapIsReady.promise(1).then(function(instances) {
+      instances.forEach(function(inst) {
+        // la aplicación está preparada
+        ionic.Platform.ready(function() {
+          GeoService.getCurrentPosition(function (position) {
+            $scope.map.control.refresh({
+                  latitude: position.coords.latitude,
+                  longitude: position.coords.longitude
+                }
+            );
           });
         });
+      });
+    });
 
-        $scope.map = GeoService.map;
-        $scope.map.options =  {
-          disableDefaultUI: !0,
-          mapTypeControl: !1,
-          tilt: 45
-        };
+    $scope.map = GeoService.map;
+    $scope.map.options =  {
+      disableDefaultUI: !0,
+      mapTypeControl: !1,
+      tilt: 45
+    };
 
-      Users.current()
-          .then(function(user){
+    $scope.reloadMap = false;
+    $timeout(function(){
+      $scope.reloadMap = true;
+    }, 500);
 
-          })
-          .catch(function(data){
-            $state.go('app.account');
-          });
+  Users.current()
+      .then(function(user){
+
+      })
+      .catch(function(data){
+        $state.go('app.account');
+      });
 })
 
 .controller('AccountCtrl', function($scope, $ionicModal, $cookies, Users, HappinessesService, happinessRange) {

@@ -308,3 +308,57 @@ ion-tabs.tabs-color-active-positive .tab-item.activated {
   }
 }
 
+.item .item-text-wrap{
+  white-space: normal;
+}
+
+.tabs-striped .tabs,
+.title.title-center.header-item{
+  border: none;
+}
+
+.platform-ios ion-header-bar{
+  box-shadow: 0 -5px 15px 5px rgba(0, 0, 0, 0.1);
+}
+
+.platform-android .tab-nav.tabs{
+  box-shadow: 0 -5px 15px 5px rgba(0, 0, 0, 0.1);
+}
+
+ion-content{
+  background-color: #FFE75E;
+}
+
+ion-item.item:not(.item-divider){
+  margin: 20px;
+  border: none;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+  border-radius: 2px;
+  &.item-avatar{
+    img{
+      top: 10px;
+      left: 10px;
+      max-height: 55px;
+      max-width: 55px;
+    }
+    p, h2{
+      padding-left: 10px;
+    }
+  }
+}
+ion-item.item-divider.item {
+  background-color: transparent;
+  border: none;
+  text-align: center;
+  font-size: 24px;
+  font-weight: 300;
+  padding-bottom: 0;
+  margin-top: 40px;
+}
+
+
+.bar.bar-header .title{
+  text-align: center;
+  font-weight: 300;
+  border: none;
+}

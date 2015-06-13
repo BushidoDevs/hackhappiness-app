@@ -3,6 +3,10 @@
     <button class="button button-icon icon ion-ios-plus-empty" ng-click="openAddHappiness()"></button>
   </ion-nav-buttons -->
   <ion-content>
+    <ion-refresher
+            pulling-text="Pull to refresh..."
+            on-refresh="loadHappiness()">
+    </ion-refresher>
     <ion-list>
       <ion-item ng-repeat="happiness in happinesses track by $index" type="item-text-wrap">
         <div class="padding-vertical text-center">
@@ -12,9 +16,7 @@
         }"></i>
         </div>
         <h2>{{happiness.message}}</h2>
-        <p ng-if="happiness.city && happiness.city">
-          <span ng-if="happiness.city">{{happiness.city}}</span><span ng-if="happiness.city && happiness.city">, </span><span ng-if="happiness.country">{{happiness.country}}</span>
-        </p>
+        <p ng-if="happiness.city" class="item-text-wrap">{{happiness.city}}</p>
       </ion-item>
     </ion-list>
   </ion-content>
