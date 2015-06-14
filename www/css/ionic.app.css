@@ -7896,13 +7896,23 @@ a.button {
     color: #262626; }
 
 .tab-nav.tabs {
-  background: #FFE75E; }
+  padding-top: 0;
+  background: #FDF77C; }
+  .tab-nav.tabs a {
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    -ms-transition: all .3s;
+    -o-transition: all .3s;
+    transition: all .3s; }
+
+ion-tabs.tabs-color-active-positive .tab-item {
+  padding-top: 2px; }
+  ion-tabs.tabs-color-active-positive .tab-item.tab-item-active, ion-tabs.tabs-color-active-positive .tab-item.tab-item.active, ion-tabs.tabs-color-active-positive .tab-item.tab-item.activated {
+    background: #FFFCC4;
+    color: #262626; }
 
 body {
   background: #FFE75E; }
-
-ion-tabs.tabs-color-active-positive .tab-item.tab-item-active, ion-tabs.tabs-color-active-positive .tab-item.active, ion-tabs.tabs-color-active-positive .tab-item.activated {
-  color: #262626; }
 
 .shape-map {
   background: rgba(204, 204, 204, 0.7);

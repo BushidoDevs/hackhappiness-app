@@ -4,6 +4,9 @@ $happyButtonSize: 70px;
 $happyButtonShadow: #C2950F;
 $happyButtonExpansion: #FFA000;
 $darkBlack: #262626;
+$tabnav: #FDF77C;
+$tabnavSelected: #FFFCC4;
+$greyShape: #ccc;
 
 @mixin transition($transition) {
   -webkit-transition: $transition;
@@ -117,21 +120,31 @@ $darkBlack: #262626;
 }
 
 .tab-nav.tabs {
-  background: $happyButton;
+  padding-top: 0;
+  background: $tabnav;
+  a{
+    @include  transition(all .3s);
+  }
+}
+
+ion-tabs.tabs-color-active-positive .tab-item{
+  padding-top: 2px;
+  &.tab-item-active,
+  &.tab-item.active,
+  &.tab-item.activated {
+    background: $tabnavSelected;
+    color: $darkBlack;
+  }
 }
 
 body{
   background: $happyButton;
 }
 
-ion-tabs.tabs-color-active-positive .tab-item.tab-item-active,
-ion-tabs.tabs-color-active-positive .tab-item.active,
-ion-tabs.tabs-color-active-positive .tab-item.activated {
-  color: $darkBlack;
-}
+
 
 .shape-map {
-  background: rgba(#ccc, 0.7);
+  background: rgba($greyShape, 0.7);
   position: absolute;
   top: 0;
   left: 0;
@@ -139,7 +152,7 @@ ion-tabs.tabs-color-active-positive .tab-item.activated {
   bottom: 0;
   z-index: 1;
   &.transparent {
-    background: rgba(#ccc, 0);
+    background: rgba($greyShape, 0);
   }
   button {
     @include transition(all .3s);

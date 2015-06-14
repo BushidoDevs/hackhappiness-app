@@ -19,7 +19,11 @@ angular.module('app.directives', ['app.services'])
 
                       GeoService.getStreetName(position.coords,
                           function onSuccess(info){
-                              $scope.happinessData.city = info.data.results[0].formatted_address;
+                              // $scope.happinessData.city
+                              var googleCity = info.data.results[0].formatted_address;
+                              var splitedGoogleCity = googleCity.split(',').reverse().splice(0,2);
+                              $scope.happinessData.city = splitedGoogleCity.join();
+
                               HappinessesService.post($scope.happinessData)
                                   .success(function(){
                                       $scope.initHappinesData();

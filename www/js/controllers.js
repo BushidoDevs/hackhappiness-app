@@ -169,6 +169,11 @@ angular.module('app.controllers', ['uiGmapgoogle-maps'])
     $scope.auth.modal.hide();
   };
 
+  $scope.meterConfig = {
+    hideBar : true,
+    staticPos: true
+  };
+
   $scope.doRegister = function(form){
     currentForm = form;
     if(form.$valid)
