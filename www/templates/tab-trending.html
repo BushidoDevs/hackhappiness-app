@@ -8,13 +8,8 @@
             on-refresh="loadHappiness()">
     </ion-refresher>
     <ion-list>
-      <ion-item ng-repeat="happiness in happinesses track by $index" type="item-text-wrap">
-        <div class="padding-vertical text-center">
-          <i class="button button-small button-icon icon" ng-repeat="n in happinessRange" ng-class="{
-        'ion-happy': n <= happiness.level,
-        'ion-happy-outline': n > happiness.level
-        }"></i>
-        </div>
+      <ion-item ng-repeat="happiness in happinesses track by $index" ng-init="happinessData.level = happiness.level" type="item-text-wrap">
+        <hackhappines-happy-meter></hackhappines-happy-meter>
         <h2>{{happiness.message}}</h2>
         <p ng-if="happiness.city" class="item-text-wrap">{{happiness.city}}</p>
       </ion-item>

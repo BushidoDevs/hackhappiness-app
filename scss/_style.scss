@@ -120,6 +120,10 @@ $darkBlack: #262626;
   background: $happyButton;
 }
 
+body{
+  background: $happyButton;
+}
+
 ion-tabs.tabs-color-active-positive .tab-item.tab-item-active,
 ion-tabs.tabs-color-active-positive .tab-item.active,
 ion-tabs.tabs-color-active-positive .tab-item.activated {
@@ -134,7 +138,7 @@ ion-tabs.tabs-color-active-positive .tab-item.activated {
   right: 0;
   bottom: 0;
   z-index: 1;
-  &.transparent{
+  &.transparent {
     background: rgba(#ccc, 0);
   }
   button {
@@ -237,6 +241,11 @@ ion-tabs.tabs-color-active-positive .tab-item.activated {
   left: 5%;
   opacity: 0;
   transition: all .3s;
+  &.static{
+    position: relative;
+    margin: -20px -5% 20px;
+    width: 100%;
+  }
   &.visible {
     opacity: 1;
   }
@@ -308,44 +317,46 @@ ion-tabs.tabs-color-active-positive .tab-item.activated {
   }
 }
 
-.item .item-text-wrap{
+.item .item-text-wrap {
   white-space: normal;
 }
 
 .tabs-striped .tabs,
-.title.title-center.header-item{
+.title.title-center.header-item {
   border: none;
 }
 
-.platform-ios ion-header-bar{
+.platform-ios ion-header-bar,
+ion-header-bar.bar.bar-header.disable-user-behavior {
   box-shadow: 0 -5px 15px 5px rgba(0, 0, 0, 0.1);
 }
 
-.platform-android .tab-nav.tabs{
+.platform-android .tab-nav.tabs {
   box-shadow: 0 -5px 15px 5px rgba(0, 0, 0, 0.1);
 }
 
-ion-content{
-  background-color: #FFE75E;
+ion-content {
+  background-color: $happyButton;
 }
 
-ion-item.item:not(.item-divider){
+ion-item.item:not(.item-divider) {
   margin: 20px;
   border: none;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
   border-radius: 2px;
-  &.item-avatar{
-    img{
+  &.item-avatar {
+    img {
       top: 10px;
       left: 10px;
       max-height: 55px;
       max-width: 55px;
     }
-    p, h2{
+    p, h2 {
       padding-left: 10px;
     }
   }
 }
+
 ion-item.item-divider.item {
   background-color: transparent;
   border: none;
@@ -356,8 +367,45 @@ ion-item.item-divider.item {
   margin-top: 40px;
 }
 
+label.item.item-input.item-floating-label,
+label.item {
+  border: none;
+  background-color: transparent;
+  padding: 0 15px;
+  input {
+    background-color: white;
+    margin: 0 auto;
+    padding: 0 10px;
+    border-radius: 3px;
+  }
+  button.button {
+    border: none;
+    margin-top: 25px;
+  }
+}
 
-.bar.bar-header .title{
+.bar-footer {
+  background-color: $happyButton;
+  button.button.button-clear {
+    color: black;
+    font-weight: 400;
+    &:not(.active) {
+      color: #6E6E6E;
+      background-color: white;
+      font-weight: 400;
+    }
+  }
+}
+
+.item.form-errors.ng-active {
+  background-color: transparent;
+  border: none;
+  text-align: right;
+  font-size: 14px;
+  padding-bottom: 5px;
+}
+
+.bar.bar-header .title {
   text-align: center;
   font-weight: 300;
   border: none;

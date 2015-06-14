@@ -50,6 +50,11 @@ angular.module('app.controllers', ['uiGmapgoogle-maps'])
   $scope.happinesses = [];
   $scope.happinessRange = [1, 2, 3, 4, 5];
 
+  $scope.meterConfig = {
+    hideBar : true,
+    staticPos: true
+  };
+
   $scope.loadHappiness = function() {
     HappinessesService.get({
       $sort: {

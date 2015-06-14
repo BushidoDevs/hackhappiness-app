@@ -19,9 +19,6 @@ angular.module('app', ['ionic', 'ngResource', 'ngMessages', 'ngCookies', 'valida
       // org.apache.cordova.statusbar required
       StatusBar.styleLightContent();
     }
-
-    console.log(ionic.Platform.isAndroid());
-    console.log(ionic.Platform.showStatusBar());
   });
 })
 .config(function($stateProvider, $urlRouterProvider, uiGmapGoogleMapApiProvider) {

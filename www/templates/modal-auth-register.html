@@ -1,21 +1,14 @@
 <form name="registerForm" ng-submit="doRegister(registerForm)" novalidate>
 	<div class="list">
-		<label class="item item-input item-floating-label" ng-class="{
-			'has-error': signinForm.name.$invalid
-		}">
-			<span class="input-label">First name</span>
-			<input type="text" name="firstName" ng-model="auth.data.firstName" ng-model-options="{ updateOn: 'blur' }" ng-minlength="3" ng-maxlength="255" required placeholder="First name">
-		</label>
 		<div class="item form-errors" ng-messages="registerForm.firstName.$error" role="alert" ng-show="registerForm.firstName.$invalid">
 			<div class="form-error" ng-message="required">First name is required</div>
 			<div class="form-error" ng-message="minlength">Your name must have more than 3 characters</div>
 			<div class="form-error" ng-message="maxlength">Your name must have less than 255 characters</div>
 		</div>
 		<label class="item item-input item-floating-label" ng-class="{
-			'has-error': signinForm.username.$invalid
+			'has-error': signinForm.name.$invalid
 		}">
-			<span class="input-label">Email</span>
-			<input type="text" name="username" ng-model="auth.data.username" ng-model-options="{ updateOn: 'blur' }" ng-minlength="6" ng-maxlength="255" required placeholder="Email">
+			<input type="text" name="firstName" ng-model="auth.data.firstName" ng-model-options="{ updateOn: 'blur' }" ng-minlength="3" ng-maxlength="255" required placeholder="First name">
 		</label>
 		<div class="item form-errors" ng-messages="registerForm.username.$error" role="alert" ng-show="registerForm.username.$invalid">
 			<div class="form-error" ng-message="required">Email is required</div>
@@ -24,25 +17,28 @@
 			<div class="form-error" ng-message="serverMessage">{{registerForm.username.serverMessage}}</div>
 		</div>
 		<label class="item item-input item-floating-label" ng-class="{
-			'has-error': signinForm.password.$invalid
+			'has-error': signinForm.username.$invalid
 		}">
-			<span class="input-label">Password</span>
-			<input type="password" name="password" ng-model="auth.data.password" ng-model-options="{ updateOn: 'blur' }" ng-minlength="6" required placeholder="Password">
+			<input type="text" name="username" ng-model="auth.data.username" ng-model-options="{ updateOn: 'blur' }" ng-minlength="6" ng-maxlength="255" required placeholder="Email">
 		</label>
 		<div class="item form-errors" ng-messages="registerForm.password.$error" role="alert" ng-show="registerForm.password.$invalid">
 			<div class="form-error" ng-message="required">Password is required</div>
 			<div class="form-error" ng-message="minlength">Your password must be at least 6 characters long</div>
 		</div>
 		<label class="item item-input item-floating-label" ng-class="{
-			'has-error': signinForm.password2.$invalid
+			'has-error': signinForm.password.$invalid
 		}">
-			<span class="input-label">Confirm password</span>
-			<input type="password" name="password2" ng-model="auth.data.password2" ng-model-options="{ updateOn: 'blur' }" ng-minlength="6" match="registerForm.password" required placeholder="Confirm password">
+			<input type="password" name="password" ng-model="auth.data.password" ng-model-options="{ updateOn: 'blur' }" ng-minlength="6" required placeholder="Password">
 		</label>
 		<div class="item form-errors" ng-messages="registerForm.password2.$error" role="alert" ng-show="registerForm.password2.$invalid">
 			<div class="form-error" ng-message="required">Confirm password is required</div>
 			<div class="form-error" ng-message="match">Write the same password twice</div>
 		</div>
+		<label class="item item-input item-floating-label" ng-class="{
+			'has-error': signinForm.password2.$invalid
+		}">
+			<input type="password" name="password2" ng-model="auth.data.password2" ng-model-options="{ updateOn: 'blur' }" ng-minlength="6" match="registerForm.password" required placeholder="Confirm password">
+		</label>
 		<label class="item">
 			<button class="button button-block button-positive" type="submit">Continue</button>
 		</label>
