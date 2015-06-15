@@ -8097,8 +8097,6 @@ ion-item.item:not(.item-divider) {
     left: 10px;
     max-height: 55px;
     max-width: 55px; }
-  ion-item.item:not(.item-divider).item-avatar p, ion-item.item:not(.item-divider).item-avatar h2 {
-    padding-left: 10px; }
 
 ion-item.item-divider.item {
   background-color: transparent;
@@ -8143,3 +8141,40 @@ label.item.item-input.item-floating-label, label.item {
   text-align: center;
   font-weight: 300;
   border: none; }
+
+ion-item.item:not(.item-divider) {
+  border: none;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+  border-radius: 2px;
+  margin: 10px; }
+  ion-item.item:not(.item-divider) p span {
+    font-size: 13px; }
+    ion-item.item:not(.item-divider) p span.time {
+      font-weight: bold;
+      float: right;
+      font-size: 15px; }
+
+ion-item.item:not(.item-divider).item-avatar img {
+  top: 0;
+  left: 0;
+  max-height: 100%;
+  position: relative;
+  max-width: 100%;
+  border-radius: 0; }
+
+.aboutProfile {
+  padding: 5px;
+  text-align: center;
+  overflow: auto; }
+  .aboutProfile .col-50 {
+    display: inline-block;
+    overflow: auto;
+    max-width: 160px;
+    width: 50%; }
+  .aboutProfile ion-item.item {
+    float: left;
+    padding: 0;
+    margin: 10px 0; }
+    .aboutProfile ion-item.item h2 {
+      padding: 5px;
+      text-align: center; }

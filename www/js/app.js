@@ -5,9 +5,9 @@
 // the 2nd parameter is an array of 'requires'
 // 'app.services' is found in services.js
 // 'app.controllers' is found in controllers.js
-angular.module('app', ['ionic', 'ngResource', 'ngMessages', 'ngCookies', 'validation.match', 'app.config', 'app.controllers', 'app.services', 'app.directives'])
+angular.module('app', ['ionic', 'ngResource', 'ngMessages', 'ngCookies', 'validation.match', 'app.config', 'app.controllers', 'app.services', 'app.directives', 'angularMoment'])
 
-.run(function($ionicPlatform) {
+.run(function($ionicPlatform, amMoment) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -20,6 +20,10 @@ angular.module('app', ['ionic', 'ngResource', 'ngMessages', 'ngCookies', 'valida
       StatusBar.styleLightContent();
     }
   });
+})
+.constant('angularMomentConfig', {
+  preprocess: 'unix', // optional
+  timezone: 'Europe/Madrid' // optional
 })
 .config(function($stateProvider, $urlRouterProvider, uiGmapGoogleMapApiProvider) {
 

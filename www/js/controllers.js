@@ -70,7 +70,9 @@ angular.module('app.controllers', ['uiGmapgoogle-maps'])
 
 })
 
-.controller('AboutCtrl', function($scope) {})
+.controller('AboutCtrl', function($scope) {
+
+})
 
 .controller('HomeCtrl', function($scope, Users, HappinessesService, happinessRange, $state, uiGmapIsReady, GeoService, $timeout) {
   $scope.happinessRange = happinessRange;
@@ -215,6 +217,13 @@ angular.module('app.controllers', ['uiGmapgoogle-maps'])
       .then(logoutSuccess)
       .catch(console.error);
   };
+
+
+
+  $scope.toDate = function(date){
+    return date.toString().substr(0, 10);
+  };
+
 
 })
 .controller('LoginCtrl', function($scope, $ionicHistory) {

@@ -8,6 +8,7 @@ $tabnav: #FDF77C;
 $tabnavSelected: #FFFCC4;
 $greyShape: #ccc;
 
+
 @mixin transition($transition) {
   -webkit-transition: $transition;
   -moz-transition: $transition;
@@ -364,9 +365,6 @@ ion-item.item:not(.item-divider) {
       max-height: 55px;
       max-width: 55px;
     }
-    p, h2 {
-      padding-left: 10px;
-    }
   }
 }
 
@@ -423,3 +421,50 @@ label.item {
   font-weight: 300;
   border: none;
 }
+
+ion-item.item:not(.item-divider) {
+  border: none;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+  border-radius: 2px;
+  margin: 10px;
+  p{
+    span{
+      font-size: 13px;
+      &.time{
+        font-weight: bold;
+        float: right;
+        font-size: 15px;
+      }
+    }
+  }
+}
+ion-item.item:not(.item-divider).item-avatar img {
+  top: 0;
+  left: 0;
+  max-height: 100%;
+  position: relative;
+  max-width: 100%;
+  border-radius: 0;
+}
+
+.aboutProfile{
+  padding: 5px;
+  text-align: center;
+  overflow: auto;
+  .col-50{
+    display: inline-block;
+    overflow: auto;
+    max-width: 160px;
+    width: 50%;
+  }
+  ion-item.item{
+    float: left;
+    padding: 0;
+    margin: 10px 0;
+    h2{
+      padding: 5px;
+      text-align: center;
+    }
+  }
+}
+

@@ -20,7 +20,9 @@
 				<h2>{{happiness.message}}</h2>
 				<p ng-if="happiness.city && happiness.city">
 					<span ng-if="happiness.city">{{happiness.city}}</span>
+					<span class="time">{{toDate(happiness.createdDate) | amCalendar}}</span>
 				</p>
+
 				</div>
 			</ion-item>
 		</ion-list>
