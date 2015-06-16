@@ -7,7 +7,7 @@
 // 'app.controllers' is found in controllers.js
 angular.module('app', ['ionic', 'ngResource', 'ngMessages', 'ngCookies', 'validation.match', 'app.config', 'app.controllers', 'app.services', 'app.directives', 'angularMoment'])
 
-.run(function($ionicPlatform, amMoment) {
+.run(function($ionicPlatform, amMoment, Users, $ionicHistory, $rootScope, $state) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -20,7 +20,20 @@ angular.module('app', ['ionic', 'ngResource', 'ngMessages', 'ngCookies', 'valida
       StatusBar.styleLightContent();
     }
   });
+
+  $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
+    Users.current()
+        .then(function(user){
+
+        })
+        .catch(function(data){
+          $state.go('app.account');
+        });
+  });
+
+
 })
+.constant('moment', moment)
 .constant('angularMomentConfig', {
   preprocess: 'unix', // optional
   timezone: 'Europe/Madrid' // optional

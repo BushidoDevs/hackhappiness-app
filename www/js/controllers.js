@@ -66,6 +66,10 @@ angular.module('app.controllers', ['uiGmapgoogle-maps'])
     });
   };
 
+  $scope.toDate = function(date){
+    return date.toString().substr(0, 10);
+  };
+
   $scope.loadHappiness();
 
 })
@@ -74,13 +78,16 @@ angular.module('app.controllers', ['uiGmapgoogle-maps'])
 
 })
 
-.controller('HomeCtrl', function($scope, Users, HappinessesService, happinessRange, $state, uiGmapIsReady, GeoService, $timeout) {
+.controller('HomeCtrl', function($scope, HappinessesService, happinessRange, $state, uiGmapIsReady, GeoService, $timeout) {
+
   $scope.happinessRange = happinessRange;
   $scope.happinessRangeMin = $scope.happinessRange[0];
   $scope.happinessRangeMax = $scope.happinessRange[$scope.happinessRange.length - 1];
 
     // el mapa está preparado
     uiGmapIsReady.promise(1).then(function(instances) {
+      console.log('map');
+
       instances.forEach(function(inst) {
         // la aplicación está preparada
         ionic.Platform.ready(function() {
@@ -107,13 +114,7 @@ angular.module('app.controllers', ['uiGmapgoogle-maps'])
       $scope.reloadMap = true;
     }, 500);
 
-  Users.current()
-      .then(function(user){
 
-      })
-      .catch(function(data){
-        $state.go('app.account');
-      });
 })
 
 .controller('AccountCtrl', function($scope, $ionicModal, $cookies, Users, HappinessesService, happinessRange) {
@@ -125,9 +126,9 @@ angular.module('app.controllers', ['uiGmapgoogle-maps'])
   };
   var setUpAccount = function(user){
     $scope.user = user;
-    getUserHappinesses();
+    $scope.getUserHappinesses();
   };
-  var getUserHappinesses = function(){
+  $scope.getUserHappinesses = function(){
     HappinessesService.get({
       user: $scope.user.id,
       $sort: {
@@ -135,6 +136,7 @@ angular.module('app.controllers', ['uiGmapgoogle-maps'])
       }
     }).then(function(response){
       $scope.happinesses = response.data;
+      $scope.$broadcast('scroll.refreshComplete');
     });
   };
   var loginSuccess = function(user){

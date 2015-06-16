@@ -12,6 +12,14 @@ angular.module('app.directives', ['app.services'])
 
           // Perform the action when the user submits the login form
           $scope.addHappiness = function() {
+
+              var randomPhrase = Math.floor((Math.random() * 1) + 1);
+              switch(randomPhrase){
+                  case 1:
+                      $scope.buttonMSG = 'Sending your happiness';
+                      break;
+              }
+
               GeoService.getCurrentPosition(function(position){
                   if(position.coords)
                   {

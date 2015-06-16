@@ -95,7 +95,7 @@ angular.module('app.services', ['dpd', 'ngCookies'])
           id: aHappinesses.id,
           latitude: aHappinesses.loc[1],
           longitude: aHappinesses.loc[0],
-          icon: 'img/icon.png',
+          icon: 'img/marker/smiley_'+aHappinesses.level+'.png'
         };
         response.push(ret);
       });

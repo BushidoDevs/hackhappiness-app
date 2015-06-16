@@ -11,7 +11,10 @@
       <ion-item ng-repeat="happiness in happinesses track by $index" ng-init="happinessData.level = happiness.level" type="item-text-wrap">
         <hackhappines-happy-meter></hackhappines-happy-meter>
         <h2>{{happiness.message}}</h2>
-        <p ng-if="happiness.city" class="item-text-wrap">{{happiness.city}}</p>
+        <p ng-if="happiness.city" class="item-text-wrap">
+          <span>{{happiness.city}}</span>
+          <span class="time">{{toDate(happiness.createdDate) | amCalendar}}</span>
+        </p>
       </ion-item>
     </ion-list>
   </ion-content>
