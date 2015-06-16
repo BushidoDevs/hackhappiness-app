@@ -66,12 +66,12 @@ angular.module('app.services', ['dpd', 'ngCookies'])
     getStreetName: function(location, onSuccess) {
       //https://maps.googleapis.com/maps/api/geocode/json?address=lat,lon
       var requestURL = 'https://maps.googleapis.com/maps/api/geocode/json?address=';
-      $http.get(requestURL+location['latitude']+','+location['longitude']).then(function(resp) {
+      $http.get(requestURL+location.latitude+','+location.longitude).then(function(resp) {
         onSuccess(resp);
       }, function(err) {
         console.error('ERR', err);
         // err.status will contain the status code
-      })
+      });
     },
     map: {
       center: mapConfig.center,
@@ -102,6 +102,6 @@ angular.module('app.services', ['dpd', 'ngCookies'])
       deferred.resolve(response);
     });
     return deferred.promise;
-  }
+  };
   return Happinesses;
 });

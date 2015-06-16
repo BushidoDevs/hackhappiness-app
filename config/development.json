@@ -1,7 +1,7 @@
 {
   "dpdConfig": {
     "collections": ["happinesses", "users"],
-    "serverRoot": "http://localhost:3000/",
+    "serverRoot": "http://hackhappiness.herokuapp.com/",
     "socketOptions": {
       "reconnectionDelayMax": 3000
     },

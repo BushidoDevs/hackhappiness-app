@@ -86,8 +86,6 @@ angular.module('app.controllers', ['uiGmapgoogle-maps'])
 
     // el mapa está preparado
     uiGmapIsReady.promise(1).then(function(instances) {
-      console.log('map');
-
       instances.forEach(function(inst) {
         // la aplicación está preparada
         ionic.Platform.ready(function() {
