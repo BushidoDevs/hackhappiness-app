@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<widget id="com.ionicframework.app140789" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-  <name>Hackhappiness</name>
+<widget id="org.hackhappines.app" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+  <name>HappyApp</name>
   <description>
-        Compartir mensajes positivos en diferentes comunidades
-    </description>
-  <author email="web@geeks2team.es" href="http://geeks2team.es/">
-      Geeks2Team
-    </author>
+    Happiness is important for our relationships, work and community…when we feel happier, we’re more open to collaboration, contribution and innovation. What if we could HACK HAPPINESS? How could we change the world and make it a better place.
+  </description>
+  <author email="info@angularbeers.com" href="http://angularbeers.com">
+      AngularBeers
+  </author>
   <content src="index.html"/>
   <access origin="*"/>
   <allow-navigation href="*" />

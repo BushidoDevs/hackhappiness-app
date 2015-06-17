@@ -1,5 +1,5 @@
 {
-  "name": "hackhappiness",
+  "name": "happyapp",
   "version": "1.0.0",
   "description": "Hackhappiness: compartir mensajes positivos en diferentes comunidades",
   "dependencies": {},
@@ -34,7 +34,7 @@
     "cordova-plugin-whitelist"
   ],
   "cordovaPlatforms": [
-    "ios",
-    "android"
+    "android",
+    "ios"
   ]
 }
