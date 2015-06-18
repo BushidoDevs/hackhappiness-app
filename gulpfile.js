@@ -52,24 +52,20 @@ gulp.task('git-check', function(done) {
   done();
 });
 // Install npm packages.
-gulp.task('npm', function(done) {
+gulp.task('npm', ['git-check'], function(done) {
   gulp.src(['./package.json'])
     .pipe(install());
+  done();
 });
 // Install bower dependenices.
-gulp.task('bower', function () {
+gulp.task('bower', ['npm'], function (done) {
   bower.commands.install()
     .on('log', function(data) {
       gutil.log('bower', gutil.colors.cyan(data.id), data.message);
     });
+  done();
 });
-// Set bower dependencies.
-gulp.task('wiredep', function(){
-  gulp.src(paths.html)
-    .pipe(wiredep.stream())
-    .pipe(gulp.dest(paths.www + './'));
-});
-gulp.task('install', ['git-check', 'npm', 'bower', 'setup', 'wiredep']);
+gulp.task('install', ['git-check', 'npm', 'bower']);
 
 // Build sass file.
 gulp.task('sass', function(done) {
@@ -77,8 +73,8 @@ gulp.task('sass', function(done) {
     .pipe(sass({
       errLogToConsole: true
     }))
-    .pipe(gulp.dest(paths.www + 'css/'))
-    .on('end', done);
+    .pipe(gulp.dest(paths.www + 'css/'));
+  done();
 });
 
 // concat all html templates and load into templateCache
@@ -89,22 +85,32 @@ gulp.task('templateCache', function(done) {
       'root': 'templates/',
       'module': 'app'
     }))
-    .pipe(gulp.dest(paths.www + 'js'))
-    .on('end', done);
+    .pipe(gulp.dest(paths.www + 'js'));
+  done();
 });
 gulp.task('constants', function (done) {
   var env = (gutil.env.production ? 'production' : 'development');
   var constnats = require('./config/' + env + '.json');
-  return ngConstant({
+  ngConstant({
       name: 'app.config',
       deps: [],
       constants: constnats,
       stream: true
     })
     .pipe(gulp.dest(paths.www + 'js'));
+  done();
+});
+// Set bower dependencies.
+gulp.task('wiredep', ['bower'], function(done){
+  gulp.src(paths.html)
+    .pipe(wiredep.stream())
+    .pipe(gulp.dest(paths.www + './'));
+  done();
 });
 
-gulp.task('setup', ['sass', 'templateCache', 'constants']);
+gulp.task('setup', ['sass', 'templateCache', 'constants', 'wiredep']);
+
+gulp.task('default', ['setup']);
 
 gulp.task('jshint', function() {
   gulp.src(paths.scripts)
@@ -117,7 +123,6 @@ gulp.task('watch', function() {
   gulp.watch(paths.templates, ['templateCache']);
   gulp.watch(paths.config, ['constants']);
 });
-gulp.task('default', ['sass', 'templateCache', 'constants']);
 
 gulp.task('clean', function(done) {
   gulp.src(paths.dist, { read: false })
