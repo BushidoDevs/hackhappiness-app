@@ -223,37 +223,37 @@ body{
       border-radius: 100%;
       //@include expoOut(1500);
       transition: all 1s;
-      transform: scale(0.9);
+      @include scale(0.9);
     }
 
     &.iconGrow_1:before {
       background-color: rgba($happyButton, 0.3);
-      transform: scale(1.5);
+      @include scale(1.5);
     }
     &.iconGrow_2:before {
       background-color: rgba($happyButton, 0.5);
       transition: all .7s;
-      transform: scale(2);
+      @include scale(2);
     }
     &.iconGrow_3:before {
       background-color: rgba($happyButton, 0.6);
       transition: all .5s;
-      transform: scale(2.5);
+      @include scale(2.5);
     }
     &.iconGrow_4:before {
       background-color: rgba($happyButton, 0.7);
       transition: all .3s;
-      transform: scale(3);
+      @include scale(3);
     }
     &.iconGrow_5:before {
       background-color: rgba($happyButton, 1);
       transition: all .3s;
-      transform: scale(15);
+      @include scale(15);
     }
     &.iconGrow_6:before {
       background-color: rgba($happyButton, 1);
       transition: all .3s;
-      transform: scale(.9);
+      @include scale(.9);
     }
   }
 }

@@ -7999,30 +7999,58 @@ body {
       z-index: -1;
       border-radius: 100%;
       transition: all 1s;
+      -moz-transform: scale(0.9);
+      -o-transform: scale(0.9);
+      -ms-transform: scale(0.9);
+      -webkit-transform: scale(0.9);
       transform: scale(0.9); }
     .shape-map button.iconGrow_1:before {
       background-color: rgba(255, 231, 94, 0.3);
+      -moz-transform: scale(1.5);
+      -o-transform: scale(1.5);
+      -ms-transform: scale(1.5);
+      -webkit-transform: scale(1.5);
       transform: scale(1.5); }
     .shape-map button.iconGrow_2:before {
       background-color: rgba(255, 231, 94, 0.5);
       transition: all .7s;
+      -moz-transform: scale(2);
+      -o-transform: scale(2);
+      -ms-transform: scale(2);
+      -webkit-transform: scale(2);
       transform: scale(2); }
     .shape-map button.iconGrow_3:before {
       background-color: rgba(255, 231, 94, 0.6);
       transition: all .5s;
+      -moz-transform: scale(2.5);
+      -o-transform: scale(2.5);
+      -ms-transform: scale(2.5);
+      -webkit-transform: scale(2.5);
       transform: scale(2.5); }
     .shape-map button.iconGrow_4:before {
       background-color: rgba(255, 231, 94, 0.7);
       transition: all .3s;
+      -moz-transform: scale(3);
+      -o-transform: scale(3);
+      -ms-transform: scale(3);
+      -webkit-transform: scale(3);
       transform: scale(3); }
     .shape-map button.iconGrow_5:before {
       background-color: #ffe75e;
       transition: all .3s;
+      -moz-transform: scale(15);
+      -o-transform: scale(15);
+      -ms-transform: scale(15);
+      -webkit-transform: scale(15);
       transform: scale(15); }
     .shape-map button.iconGrow_6:before {
       background-color: #ffe75e;
       transition: all .3s;
-      transform: scale(.9); }
+      -moz-transform: scale(0.9);
+      -o-transform: scale(0.9);
+      -ms-transform: scale(0.9);
+      -webkit-transform: scale(0.9);
+      transform: scale(0.9); }
 
 .meter-zone {
   position: absolute;
