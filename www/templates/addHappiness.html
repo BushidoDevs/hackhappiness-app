@@ -1,34 +1,8 @@
-<div>
-  <div class="text-center padding-vertical" ng-hide="isHappinessLevelSet">
-    <button type="button" class="button button-large icon ion-happy" on-touch="startHappiness()" on-release="stopHappiness()"></button>
-  </div>
-  <form ng-submit="addHappiness()" class="list" ng-show="isHappinessLevelSet">
-    <div class="item range">
-      <i class="icon ion-happy-outline"></i>
-      <input type="range" ng-model="happinessData.level" min="{{happinessRangeMin}}" max="{{happinessRangeMax}}" step="1">
-      <i class="">{{happinessData.level}}</i>
-    </div>
-    <label class="item item-input item-stacked-label">
-      <span class="input-label">What is making you so happy?</span>
-      <textarea type="text" ng-model="happinessData.message" placehoder="#Hackhappines"></textarea>
-    </label>
-    <div class="item item-toggle">
-      Geolocale
-      <label class="toggle">
-        <input type="checkbox" ng-model="allowGeolocale" ng-change="toggleAllowGeolocale()">
-        <div class="track">
-          <div class="handle"></div>
-        </div>
-      </label>
-    </div>
-    <div class="item" ng-show="geolocating || happinessData.city || happinessData.country">
-      <ion-spinner ng-show="geolocating"></ion-spinner>
-      <p ng-if="happinessData.city && happinessData.city">
-        <span ng-if="happinessData.city">{{happinessData.city}}</span><span ng-if="happinessData.city && happinessData.city">, </span><span ng-if="happinessData.country">{{happinessData.country}}</span>
-      </p>
-    </div>
-    <label class="item">
-      <button class="button button-block button-positive" type="submit">Submit</button>
-    </label>
-  </form>
+<div class="shape-map" ng-class="{'transparent':isPositionSended}">
+    <button type="button" class="button button-large iconGrow_{{happinessData.level}}"
+            ng-class="{'iconGrow_5 active': isHappinessLevelSet, 'iconGrow_6 gone': isPositionSended}"
+            on-touch="startHappiness()" on-release="stopHappiness()">
+        <span>{{buttonMSG}}</span>
+        <i class=" icon ion-happy-outline "></i>
+    </button>
 </div>

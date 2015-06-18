@@ -1,0 +1,13 @@
+<ion-view view-title="HappyApp">
+    <ion-content class="fullHeight">
+        <hackhappines-happy-meter></hackhappines-happy-meter>
+        <hackhappines-addhackhappines></hackhappines-addhackhappines>
+        <ui-gmap-google-map class="fullHeight" center='map.center' ng-if="reloadMap"
+                            zoom='map.zoom'
+                            control='map.control'
+                            options='map.options'
+                            bounds='map.bounds'
+                            pan="true">
+        </ui-gmap-google-map>
+    </ion-content>
+</ion-view>

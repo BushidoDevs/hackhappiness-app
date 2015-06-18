@@ -5,20 +5,38 @@
 // the 2nd parameter is an array of 'requires'
 // 'app.services' is found in services.js
 // 'app.controllers' is found in controllers.js
-angular.module('app', ['ionic', 'ngResource', 'ngMessages', 'ngCookies', 'validation.match', 'app.config', 'app.controllers', 'app.services', 'app.directives'])
+angular.module('app', ['ionic', 'ngResource', 'ngMessages', 'ngCookies', 'validation.match', 'app.config', 'app.controllers', 'app.services', 'app.directives', 'angularMoment'])
 
-.run(function($ionicPlatform) {
+.run(function($ionicPlatform, amMoment, Users, $ionicHistory, $rootScope, $state) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
     if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
     }
+
     if (window.StatusBar) {
       // org.apache.cordova.statusbar required
       StatusBar.styleLightContent();
     }
   });
+
+  $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
+    Users.current()
+        .then(function(user){
+
+        })
+        .catch(function(data){
+          $state.go('app.account');
+        });
+  });
+
+
+})
+.constant('moment', moment)
+.constant('angularMomentConfig', {
+  preprocess: 'unix', // optional
+  timezone: 'Europe/Madrid' // optional
 })
 .config(function($stateProvider, $urlRouterProvider, uiGmapGoogleMapApiProvider) {
 
@@ -26,6 +44,7 @@ angular.module('app', ['ionic', 'ngResource', 'ngMessages', 'ngCookies', 'valida
   // Learn more here: https://github.com/angular-ui/ui-router
   // Set up the various states which the app can be in.
   // Each state's controller can be found in controllers.js
+
   $stateProvider
 
   // setup an abstract state for the tabs directive
@@ -45,6 +64,22 @@ angular.module('app', ['ionic', 'ngResource', 'ngMessages', 'ngCookies', 'valida
         controller: 'MapCtrl'
       }
     }
+  })
+
+  .state('app.home', {
+    url: '/home',
+    resolve: {
+      happinessRange: function(){
+        return [1, 2, 3, 4, 5];
+      }
+    },
+    views: {
+      'tab-home': {
+        templateUrl: 'templates/tab-addHappiness.html',
+        controller: 'HomeCtrl'
+      }
+    },
+    cache: false
   })
 
   .state('app.trending', {
@@ -86,6 +121,6 @@ angular.module('app', ['ionic', 'ngResource', 'ngMessages', 'ngCookies', 'valida
   });
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/map');
+  $urlRouterProvider.otherwise('/home');
 
 });

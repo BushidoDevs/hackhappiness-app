@@ -1,19 +1,19 @@
 <ion-view view-title="Trendings {{allowGeolocale}}">
-  <ion-nav-buttons side="secondary">
+  <!--ion-nav-buttons side="secondary">
     <button class="button button-icon icon ion-ios-plus-empty" ng-click="openAddHappiness()"></button>
-  </ion-nav-buttons>
+  </ion-nav-buttons -->
   <ion-content>
+    <ion-refresher
+            pulling-text="Pull to refresh..."
+            on-refresh="loadHappiness()">
+    </ion-refresher>
     <ion-list>
-      <ion-item ng-repeat="happiness in happinesses track by $index" type="item-text-wrap">
-        <div class="padding-vertical text-center">
-          <i class="button button-small button-icon icon" ng-repeat="n in happinessRange" ng-class="{
-        'ion-happy': n <= happiness.level,
-        'ion-happy-outline': n > happiness.level
-        }"></i>
-        </div>
+      <ion-item ng-repeat="happiness in happinesses track by $index" ng-init="happinessData.level = happiness.level" type="item-text-wrap">
+        <hackhappines-happy-meter></hackhappines-happy-meter>
         <h2>{{happiness.message}}</h2>
-        <p ng-if="happiness.city && happiness.city">
-          <span ng-if="happiness.city">{{happiness.city}}</span><span ng-if="happiness.city && happiness.city">, </span><span ng-if="happiness.country">{{happiness.country}}</span>
+        <p ng-if="happiness.city" class="item-text-wrap">
+          <span>{{happiness.city}}</span>
+          <span class="time">{{toDate(happiness.createdDate) | amCalendar}}</span>
         </p>
       </ion-item>
     </ion-list>

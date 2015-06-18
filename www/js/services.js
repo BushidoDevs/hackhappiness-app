@@ -51,7 +51,7 @@ angular.module('app.services', ['dpd', 'ngCookies'])
   };
   return Users;
 })
-.factory('GeoService', function($resource, mapConfig) {
+.factory('GeoService', function($resource, mapConfig, $http) {
   return {
     geocoder: new google.maps.Geocoder(),
     getCurrentPosition: function(f) {
@@ -62,6 +62,16 @@ angular.module('app.services', ['dpd', 'ngCookies'])
       } else {
         alert('Unable to locate current position');
       }
+    },
+    getStreetName: function(location, onSuccess) {
+      //https://maps.googleapis.com/maps/api/geocode/json?address=lat,lon
+      var requestURL = 'https://maps.googleapis.com/maps/api/geocode/json?address=';
+      $http.get(requestURL+location.latitude+','+location.longitude).then(function(resp) {
+        onSuccess(resp);
+      }, function(err) {
+        console.error('ERR', err);
+        // err.status will contain the status code
+      });
     },
     map: {
       center: mapConfig.center,
@@ -85,13 +95,13 @@ angular.module('app.services', ['dpd', 'ngCookies'])
           id: aHappinesses.id,
           latitude: aHappinesses.loc[1],
           longitude: aHappinesses.loc[0],
-          icon: 'img/icon.png',
+          icon: 'img/marker/smiley_'+aHappinesses.level+'.png'
         };
         response.push(ret);
       });
       deferred.resolve(response);
     });
     return deferred.promise;
-  }
+  };
   return Happinesses;
 });

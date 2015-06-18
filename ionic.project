@@ -1,6 +1,6 @@
 {
-  "name": "Hackhappiness",
-  "app_id": "es.geeks2team.hackhappiness",
+  "name": "HappyApp",
+  "app_id": "org.hackhappines.app",
   "gulpStartupTasks": [
     "default",
     "watch"

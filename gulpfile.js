@@ -112,10 +112,10 @@ gulp.task('jshint', function() {
     .pipe(jshint.reporter('default'));
 });
 gulp.task('watch', function() {
+  gulp.watch(paths.scripts, ['jshint']);
   gulp.watch(paths.sass, ['sass']);
   gulp.watch(paths.templates, ['templateCache']);
   gulp.watch(paths.config, ['constants']);
-  gulp.watch(paths.scripts, ['jshint']);
 });
 gulp.task('default', ['sass', 'templateCache', 'constants']);
 

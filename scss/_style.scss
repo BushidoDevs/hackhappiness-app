@@ -1,23 +1,109 @@
+// COLORS
+$happyButton: #FFE75E;
+$happyButtonSize: 70px;
+$happyButtonShadow: #C2950F;
+$happyButtonExpansion: #FFA000;
+$darkBlack: #262626;
+$tabnav: #FDF77C;
+$tabnavSelected: #FFFCC4;
+$greyShape: #ccc;
+
+
+@mixin transition($transition) {
+  -webkit-transition: $transition;
+  -moz-transition: $transition;
+  -ms-transition: $transition;
+  -o-transition: $transition;
+  transition: $transition;
+}
+
+@mixin transform($transforms...) {
+  -moz-transform: $transforms;
+  -o-transform: $transforms;
+  -ms-transform: $transforms;
+  -webkit-transform: $transforms;
+  transform: $transforms;
+}
+
+@mixin expoOut($time: 500) {
+  -webkit-transition: all #{$time}ms cubic-bezier(1.000, 0.000, 0.000, 1.000);
+  -moz-transition: all #{$time}ms cubic-bezier(1.000, 0.000, 0.000, 1.000);
+  -o-transition: all #{$time}ms cubic-bezier(1.000, 0.000, 0.000, 1.000);
+  transition: all #{$time}ms cubic-bezier(1.000, 0.000, 0.000, 1.000); /* easeInOutExpo */
+
+  -webkit-transition-timing-function: cubic-bezier(1.000, 0.000, 0.000, 1.000);
+  -moz-transition-timing-function: cubic-bezier(1.000, 0.000, 0.000, 1.000);
+  -o-transition-timing-function: cubic-bezier(1.000, 0.000, 0.000, 1.000);
+  transition-timing-function: cubic-bezier(1.000, 0.000, 0.000, 1.000); /* easeInOutExpo */
+}
+
+@mixin keyframes($animation-name) {
+  @-webkit-keyframes $animation-name {
+    @content;
+  }
+  @-moz-keyframes $animation-name {
+    @content;
+  }
+  @-ms-keyframes $animation-name {
+    @content;
+  }
+  @-o-keyframes $animation-name {
+    @content;
+  }
+  @keyframes $animation-name {
+    @content;
+  }
+}
+
+@include keyframes(iconBounce) {
+  0% {
+    @include transform(translateY(0%));
+  }
+  50% {
+    @include transform(translateY(-20%));
+  }
+
+}
+
+@include keyframes(iconOut) {
+  0% {
+    @include transform(translateY(0%));
+  }
+  40% {
+    @include transform(translateY(20%));
+  }
+  40% {
+    @include transform(translateY(-100%));
+    opacity: 0;
+  }
+
+}
+
 /* Empty. Add your own CSS if you like */
 .fullHeight .scroll,
 .fullHeight .fullHeight,
 .angular-google-map,
-.angular-google-map-container { height: 100%; }
-.label-background { background-color: $light }
+.angular-google-map-container {
+  height: 100%;
+}
+
+.label-background {
+  background-color: $light
+}
 
 /** Styling for the username field **/
-.item.has-error {  
+.item.has-error {
   border-bottom: 2px solid $assertive;
 }
 
 /** Styling for the password field when an error exists**/
-.item.has-error-lr {  
+.item.has-error-lr {
   border-left: 2px solid $assertive;
   border-right: 2px solid $assertive;
 }
 
 /** Styling for the password field when an error has been resolved**/
-.item.valid-lr {  
+.item.valid-lr {
   border-left: 2px solid $balanced;
   border-right: 2px solid $balanced;
 }
@@ -26,3 +112,372 @@
 .form-error {
   color: $assertive;
 }
+
+.bar.bar-header {
+  background: $happyButton;
+  .title {
+    color: $darkBlack;
+  }
+}
+
+.tab-nav.tabs {
+  padding-top: 0;
+  background: $tabnav;
+  a{
+    @include  transition(all .3s);
+  }
+}
+
+ion-tabs.tabs-color-active-positive .tab-item{
+  padding-top: 2px;
+  &.tab-item-active,
+  &.tab-item.active,
+  &.tab-item.activated {
+    background: $tabnavSelected;
+    color: $darkBlack;
+  }
+}
+
+body{
+  background: $happyButton;
+}
+
+.shape-map {
+  background: rgba($greyShape, 0.7);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  &.transparent {
+    background: rgba($greyShape, 0);
+  }
+  button {
+    @include transition(all .3s);
+    width: 100px;
+    height: 100px;
+    border-radius: 100%;
+    border: none;
+    position: absolute;
+    z-index: 99;
+    top: 50%;
+    left: 50%;
+    margin: -50px;
+    color: $darkBlack;
+    padding: 0;
+
+    i.icon {
+      width: 100px;
+      height: 100px;
+      border-radius: 100%;
+      display: block;
+      padding-top: 25px;
+      background: $happyButton;
+      box-shadow: 0 0 10px $happyButtonShadow;
+      //@include expoOut(700);
+      @include transition(all .3s);
+      &:not(.iconGrow_0) {
+        //background: $happyButton;
+        box-shadow: 0 0 0 transparent;
+      }
+      &:before {
+        font-size: $happyButtonSize;
+      }
+    }
+
+    span{
+      position: absolute;
+      left: -50px;
+      right: -50px;
+      top: 75px;
+      font-size: 16px;
+      z-index: 1;
+      opacity: 0;
+      @include transition(all .3s);
+    }
+
+    &.iconGrow_5.active {
+      i {
+        animation: iconBounce 1s infinite;
+      }
+      span{
+        opacity: 1;
+      }
+    }
+    &.iconGrow_6.gone {
+      position: fixed;
+      @include expoOut(1000);
+      top: 100%;
+      margin-top: 120px;
+    }
+
+    &:before {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      content: ' ';
+      height: 100%;
+      z-index: -1;
+      border-radius: 100%;
+      //@include expoOut(1500);
+      transition: all 1s;
+      transform: scale(0.9);
+    }
+
+    &.iconGrow_1:before {
+      background-color: rgba($happyButton, 0.3);
+      transform: scale(1.5);
+    }
+    &.iconGrow_2:before {
+      background-color: rgba($happyButton, 0.5);
+      transition: all .7s;
+      transform: scale(2);
+    }
+    &.iconGrow_3:before {
+      background-color: rgba($happyButton, 0.6);
+      transition: all .5s;
+      transform: scale(2.5);
+    }
+    &.iconGrow_4:before {
+      background-color: rgba($happyButton, 0.7);
+      transition: all .3s;
+      transform: scale(3);
+    }
+    &.iconGrow_5:before {
+      background-color: rgba($happyButton, 1);
+      transition: all .3s;
+      transform: scale(15);
+    }
+    &.iconGrow_6:before {
+      background-color: rgba($happyButton, 1);
+      transition: all .3s;
+      transform: scale(.9);
+    }
+  }
+}
+
+.meter-zone {
+  position: absolute;
+  top: 20px;
+  height: 55px;
+  width: 90%;
+  z-index: 999;
+  left: 5%;
+  opacity: 0;
+  transition: all .3s;
+  &.static{
+    position: relative;
+    margin: -20px -5% 20px;
+    width: 100%;
+  }
+  &.visible {
+    opacity: 1;
+  }
+  .meter-icons {
+    height: 45px;
+    .meter-face {
+      width: 20%;
+      height: 45px;
+      float: left;
+      opacity: 0.2;
+      transition: all .3s;
+      text-align: center;
+      &.active {
+        opacity: 1;
+        &:before {
+          //box-shadow: 0 0 0 1px $darkBlack;
+        }
+      }
+      &:before {
+        content: '';
+        width: 45px;
+        height: 45px;
+        display: inline-block;
+        background-size: auto 100%;
+        border-radius: 100%;
+        background-color: $happyButton;
+      }
+      &.face_1:before {
+        background-image: url(../img/smiley/happy_1.png);
+      }
+      &.face_2:before {
+        background-image: url(../img/smiley/happy_2.png);
+      }
+      &.face_3:before {
+        background-image: url(../img/smiley/happy_3.png);
+      }
+      &.face_4:before {
+        background-image: url(../img/smiley/happy_4.png);
+      }
+      &.face_5:before {
+        background-image: url(../img/smiley/happy_5.png);
+      }
+    }
+  }
+  .meter-progress {
+    height: 5px;
+    margin: 5px 10% 0;
+    .meter-bar {
+      transition: all .7s;
+      height: 5px;
+      background-color: $happyButton;
+      border-radius: 100px;
+      &.st_1 {
+        width: 5px;
+      }
+      &.st_2 {
+        width: 25%;
+      }
+      &.st_3 {
+        width: 50%;
+      }
+      &.st_4 {
+        width: 75%;
+      }
+      &.st_5 {
+        width: 100%;
+      }
+    }
+  }
+}
+
+.item .item-text-wrap {
+  white-space: normal;
+}
+
+.tabs-striped .tabs,
+.title.title-center.header-item {
+  border: none;
+}
+
+.platform-ios ion-header-bar,
+ion-header-bar.bar.bar-header.disable-user-behavior {
+  border: none;
+  box-shadow: 0 -5px 15px 5px rgba(0, 0, 0, 0.1);
+}
+
+.platform-android .tab-nav.tabs {
+  box-shadow: 0 -5px 15px 5px rgba(0, 0, 0, 0.1);
+}
+
+ion-content {
+  background-color: $happyButton;
+}
+
+ion-item.item:not(.item-divider) {
+  margin: 20px;
+  border: none;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+  border-radius: 2px;
+  &.item-avatar {
+    img {
+      top: 10px;
+      left: 10px;
+      max-height: 55px;
+      max-width: 55px;
+    }
+  }
+}
+
+ion-item.item-divider.item {
+  background-color: transparent;
+  border: none;
+  text-align: center;
+  font-size: 24px;
+  font-weight: 300;
+  padding-bottom: 0;
+  margin-top: 40px;
+}
+
+label.item.item-input.item-floating-label,
+label.item {
+  border: none;
+  background-color: transparent;
+  padding: 0 15px;
+  input {
+    background-color: white;
+    margin: 0 auto;
+    padding: 0 10px;
+    border-radius: 3px;
+  }
+  button.button {
+    border: none;
+    margin-top: 25px;
+  }
+}
+
+.bar-footer {
+  background-color: $happyButton;
+  button.button.button-clear {
+    color: black;
+    font-weight: 400;
+    &:not(.active) {
+      color: #6E6E6E;
+      background-color: white;
+      font-weight: 400;
+    }
+  }
+}
+
+.item.form-errors.ng-active {
+  background-color: transparent;
+  border: none;
+  text-align: right;
+  font-size: 14px;
+  padding-bottom: 5px;
+}
+
+.bar.bar-header .title {
+  text-align: center;
+  font-weight: 300;
+  border: none;
+}
+
+ion-item.item:not(.item-divider) {
+  border: none;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+  border-radius: 2px;
+  margin: 10px;
+  p{
+    span{
+      font-size: 13px;
+      &.time{
+        font-weight: bold;
+        float: right;
+        font-size: 15px;
+      }
+    }
+  }
+}
+ion-item.item:not(.item-divider).item-avatar img {
+  top: 0;
+  left: 0;
+  max-height: 100%;
+  position: relative;
+  max-width: 100%;
+  border-radius: 0;
+}
+
+.aboutProfile{
+  padding: 5px;
+  text-align: center;
+  overflow: auto;
+  .col-50{
+    display: inline-block;
+    overflow: auto;
+    max-width: 160px;
+    width: 49%;
+  }
+  ion-item.item{
+    float: left;
+    padding: 0;
+    margin: 10px 0;
+    h2{
+      padding: 5px;
+      text-align: center;
+    }
+  }
+}
+

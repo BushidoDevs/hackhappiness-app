@@ -1,5 +1,5 @@
 {
-  "name": "hackhappiness",
+  "name": "happyapp",
   "version": "1.0.0",
   "description": "Hackhappiness: compartir mensajes positivos en diferentes comunidades",
   "dependencies": {},
@@ -30,10 +30,11 @@
     "com.ionic.keyboard",
     "org.apache.cordova.console",
     "org.apache.cordova.device",
-    "org.apache.cordova.geolocation"
+    "org.apache.cordova.geolocation",
+    "cordova-plugin-whitelist"
   ],
   "cordovaPlatforms": [
-    "ios",
-    "android"
+    "android",
+    "ios"
   ]
 }
