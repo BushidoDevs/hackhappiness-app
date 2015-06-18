@@ -6,8 +6,12 @@ platforms/
 plugins/
 www/lib/
 dist/
-resources/
-android/
+
+# Generated images
+resources/*
+# but not sources
+!resources/*.png
+
 templates.js
 constants.js
 .DS_Store
